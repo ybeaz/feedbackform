@@ -71,7 +71,7 @@
 
 
 
-//Checking if var is empty, see http://javascript.ru/php/empty
+//Checking if var is empty, see http://javascript.ru/php/empty 
 	function empty		( mixed_var ) {	// Determine whether a variable is empty
 		// 
 		// +   original by: Philippe Baumann
