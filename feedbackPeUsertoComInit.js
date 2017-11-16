@@ -11,6 +11,7 @@
 			window.feedback.form[0].email						=	[];
 			window.feedback.form[0].email[0]					=	{};
 			window.feedback.form[0].email[0].optPost			=	'emailTelegramFeedback';
+			window.feedback.form[0].email[0].chatId				=	'463530275';
 			window.feedback.form[0].email[0].toEmail			=	'';
 			window.feedback.form[0].email[0].fromEmail			=	'From: Premier Expert <akruglov2000@gmail.com>\r\n';
 			window.feedback.form[0].email[0].BCC				=	'akruglov2000@gmail.com';

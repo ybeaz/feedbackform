@@ -11,6 +11,7 @@
 			window.feedback.form[f].email						=	[];
 			window.feedback.form[f].email[0]					=	{};
 			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+			window.feedback.form[f].email[0].chatId				=	'463530275';
 			window.feedback.form[f].email[0].toEmail			=	'';
 			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
 			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
@@ -109,6 +110,7 @@
 			window.feedback.form[f].email						=	[];
 			window.feedback.form[f].email[0]					=	{};
 			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+			window.feedback.form[f].email[0].chatId				=	'463530275';
 			window.feedback.form[f].email[0].toEmail			=	'';
 			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
 			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
@@ -381,7 +383,7 @@
 						<div class="modal-content">\
 						<!-- Modal Header -->\
 						<div class="modal-header">\
-						<div class="modal-title h4 d-i-b">I am ready to make a callback</div>\
+						<div class="modal-title h4 d-i-b">To make you a callback, please, specify</div>\
 						<button type="button" class="close" data-dismiss="modal">&times;</button>\
 						</div>\
 						<!-- Modal body -->\

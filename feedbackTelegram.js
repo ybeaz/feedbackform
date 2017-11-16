@@ -171,8 +171,9 @@
 					//Block for select tag
 					if( window.feedback.form[f].elem[e].tagName == 'select') { 
 						
-						string	+=	'<select ' +
-								(!empty(window.feedback.form[f].elem[e].tagSelectMultiple)  ? 'multiple ' :  '' ) +
+						string	+=	'<select ';
+						string	+=	'id="select-' + f + '-' + e + '" ';
+						string	+=	(!empty(window.feedback.form[f].elem[e].tagSelectMultiple)  ? 'multiple ' :  '' ) +
 								(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 							//Select tag css class and style
 							if(!empty(window.feedback.form[f].elem[e].tagClass)){
@@ -215,29 +216,11 @@
 			
 						string	+=	'</select>';
 					}
-					//Block for textarea tag
-					else if( window.feedback.form[f].elem[e].tagName == 'textarea') { 
-						
-						string	+=	'<textarea ';
-						string	+=	(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
-						string	+=	(!empty(window.feedback.form[f].elem[e].tagPlaceholder) ? 
-										'placeholder="'	+ window.feedback.form[f].elem[e].tagPlaceholder + '" ' : '');
-						//Textarea css class and style
-						if(!empty(window.feedback.form[f].elem[e].tagClass)){
-							string	+=	'class="' + window.feedback.form[f].elem[e].tagClass + '" ';
-						}
-						if(!empty(window.feedback.form[f].elem[e].tagStyle)){
-							string	+=	'style="' + window.feedback.form[f].elem[e].tagStyle + '" ';
-						}
-						string	+=	(!empty(window.feedback.form[f].elem[e].tagValue) ? 
-										'value="'	+ window.feedback.form[f].elem[e].tagValue + '" ' : '');						
-						string	+=	'>'
-						string	+=	'</textarea>';
-					}
 					//Block for input tag
 					else if( window.feedback.form[f].elem[e].tagName === 'input') { 
 						
 						string	+=	'<input ';
+						string	+=	'id="input-' + f + '-' + e + '" ';
 						string	+=	(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 						//Input css class and style
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
@@ -254,10 +237,32 @@
 						string	+=	'/>';
 
 					}						
+					//Block for textarea tag
+					else if( window.feedback.form[f].elem[e].tagName == 'textarea') { 
+						
+						string	+=	'<textarea ';
+						string	+=	'id="textarea-' + f + '-' + e + '" ';
+						string	+=	(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
+						string	+=	(!empty(window.feedback.form[f].elem[e].tagPlaceholder) ? 
+										'placeholder="'	+ window.feedback.form[f].elem[e].tagPlaceholder + '" ' : '');
+						//Textarea css class and style
+						if(!empty(window.feedback.form[f].elem[e].tagClass)){
+							string	+=	'class="' + window.feedback.form[f].elem[e].tagClass + '" ';
+						}
+						if(!empty(window.feedback.form[f].elem[e].tagStyle)){
+							string	+=	'style="' + window.feedback.form[f].elem[e].tagStyle + '" ';
+						}
+						string	+=	(!empty(window.feedback.form[f].elem[e].tagValue) ? 
+										'value="'	+ window.feedback.form[f].elem[e].tagValue + '" ' : '');						
+						string	+=	'>'; 
+						string	+=	(window.feedback.form[f].elem[e].tagValue != undefined ? window.feedback.form[f].elem[e].tagValue :  '' );
+						string	+=	'</textarea>';
+					}
 					//Block for button tag
 					else if( 	window.feedback.form[f].elem[e].tagName == 'button') { 
 						
 						string	+=	'<button ';
+						string	+=	'id="button-' + f + '-' + e + '" ';
 						
 						//Button css class and style
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
@@ -315,10 +320,10 @@
 						string	+=	'</button>';
 					}					
 					//Block for a tag
-					else if( 	window.feedback.form[f].elem[e].tagName == 'a') { 
-						
-						string	+=	'<a href="#"';
-						
+					else if( 	window.feedback.form[f].elem[e].tagName == 'a') {					
+						string	+=	'<a ';
+						string	+=	'id="select-' + f + '-' + e + '" ';
+						string	+=	'href="#" ';
 						//a css class and style
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
 							string	+=	'class="' + window.feedback.form[f].elem[e].tagClass + '" ';
@@ -779,6 +784,7 @@
 				emailBCC:	window.feedback.form[f].email[0].BCC,
 				topic:		window.feedback.form[f].email[0].topic,				
 				message:	window.feedback.form[f].email[0].message,
+				chat_id:	window.feedback.form[f].email[0].chatId,
 				txt:		txt,
 				parse_mode: 'HTML'
 			},
@@ -787,7 +793,7 @@
 					
 					//Form reset
 					window.feedback.setFeedbackForm();					
-
+					window.feedback.cleanFeedbackForm(f)
 					//alert(echo);
 					//console.info('email echo: ',echo);
 				}

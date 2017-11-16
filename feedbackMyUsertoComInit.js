@@ -10,6 +10,7 @@
 		window.feedback.form[f].email						=	[];
 		window.feedback.form[f].email[0]					=	{};
 		window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+		window.feedback.form[f].email[0].chatId				=	'463530275';
 		window.feedback.form[f].email[0].toEmail			=	'';
 		window.feedback.form[f].email[0].fromEmail			=	'From: UserTo.com <info@userto.com>\r\n';
 		window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
