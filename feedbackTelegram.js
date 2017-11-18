@@ -169,7 +169,7 @@
 				}
 				
 					//Block for select tag
-					if( window.feedback.form[f].elem[e].tagName == 'select') { 
+					if( 	 window.feedback.form[f].elem[e].tagName == 'select') { 
 						
 						string	+=	'<select ';
 						string	+=	'id="select-' + f + '-' + e + '" ';
@@ -181,8 +181,12 @@
 							}
 							if(!empty(window.feedback.form[f].elem[e].tagStyle)){
 								string	+=	'style="' + window.feedback.form[f].elem[e].tagStyle + '" ';
-							}		
-						string	+=	'">';
+							}
+							if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+								string	+=	'data-toggle="tooltip" ';
+								string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+							}
+						string	+=	'>';
 						
 							//console.info(' window.feedback.form[',f,'].elem[',e,'].tagOption:',window.feedback.form[f].elem[e].tagOption);
 							//Loop through options in the select tag
@@ -234,6 +238,10 @@
 										'placeholder="'	+ window.feedback.form[f].elem[e].tagPlaceholder + '" ' : '');
 						string	+=	(!empty(window.feedback.form[f].elem[e].tagValue) ? 
 										'value="'	+ window.feedback.form[f].elem[e].tagValue + '" ' : '');
+						if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+							string	+=	'data-toggle="tooltip" ';
+							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+						}										
 						string	+=	'/>';
 
 					}						
@@ -249,11 +257,16 @@
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
 							string	+=	'class="' + window.feedback.form[f].elem[e].tagClass + '" ';
 						}
-						if(!empty(window.feedback.form[f].elem[e].tagStyle)){
-							string	+=	'style="' + window.feedback.form[f].elem[e].tagStyle + '" ';
-						}
+						string	+=	'style="resize: both; overflow: hidden; ' + 
+							(!empty(window.feedback.form[f].elem[e].tagStyle) ? 
+									window.feedback.form[f].elem[e].tagStyle + '" ' : '" ');
+						
 						string	+=	(!empty(window.feedback.form[f].elem[e].tagValue) ? 
-										'value="'	+ window.feedback.form[f].elem[e].tagValue + '" ' : '');						
+										'value="'	+ window.feedback.form[f].elem[e].tagValue + '" ' : '');
+						if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+							string	+=	'data-toggle="tooltip" ';
+							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+						}										
 						string	+=	'>'; 
 						string	+=	(window.feedback.form[f].elem[e].tagValue != undefined ? window.feedback.form[f].elem[e].tagValue :  '' );
 						string	+=	'</textarea>';
@@ -271,6 +284,10 @@
 						if(!empty(window.feedback.form[f].elem[e].tagStyle)){
 							string	+=	'class="' + window.feedback.form[f].elem[e].tagStyle + '" ';
 						}						
+						if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+							string	+=	'data-toggle="tooltip" ';
+							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+						}
 						
 						//Button to reset forms
 						if(		window.feedback.form[f].elem[e].tagType === 'reset'){
@@ -331,6 +348,10 @@
 						if(!empty(window.feedback.form[f].elem[e].tagStyle)){
 							string	+=	'class="' + window.feedback.form[f].elem[e].tagStyle + '" ';
 						}						
+						if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+							string	+=	'data-toggle="tooltip" ';
+							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+						}
 						
 						//a to reset forms
 						if(		window.feedback.form[f].elem[e].tagType === 'reset'){
@@ -802,3 +823,23 @@
 		return;
 	}	
 	
+
+//Script in order Bootstrap tooltips work https://codepen.io/imoddesign/pen/laoAE
+	$(function(){
+		setTimeout(function(){
+			var options = {
+				placement: function (context, element) {
+					var position = jQuery(element).position();
+					//console.log(position.top - jQuery(window).scrollTop());
+					if (position.top - jQuery(window).scrollTop() < 10){
+						return "bottom";
+					}
+					return "top";
+				}, trigger: "hover"
+			};
+			var querySel	=	'[data-toggle="tooltip"]';
+			jQuery(querySel).tooltip(options);
+		}, 1000);
+	});
+
+

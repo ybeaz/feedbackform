@@ -42,7 +42,8 @@
 			window.feedback.form[f].elem[0].tagName				=	'input';
 			window.feedback.form[f].elem[0].tagType				=	'text'; //'number';
 			window.feedback.form[f].elem[0].tagPlaceholder		=	'John Smith';						
-			window.feedback.form[f].elem[0].tagClass			=	'form-control';															
+			window.feedback.form[f].elem[0].tagClass			=	'form-control';
+			window.feedback.form[f].elem[0].tagTitleTooltip		=	'How can we apply to you?';				
 			
 			//[0][1] Data for кнопка 'Type of the user:',  form element, select, type: multiple
 			window.feedback.form[f].elem[1]						=	{};				
@@ -149,7 +150,8 @@
 			window.feedback.form[f].elem[1].tagName				=	'input';
 			window.feedback.form[f].elem[1].tagType				=	'text'; //'number';
 			window.feedback.form[f].elem[1].tagPlaceholder		=	'John Smith';						
-			window.feedback.form[f].elem[1].tagClass			=	'form-control';															
+			window.feedback.form[f].elem[1].tagClass			=	'form-control';
+			window.feedback.form[f].elem[1].tagTitleTooltip		=	'How can we apply to you?';				
 			
 			//[0][1] Data for кнопка 'Type of the user:',  form element, select, type: multiple
 			window.feedback.form[f].elem[2]						=	{};				
@@ -198,7 +200,6 @@
 	}		
 
 	
-		
 //Define	Function to setup data for feedback url-form-element-option blocks
 	function setFeedbackFormContentF2(f){
 			
@@ -240,7 +241,8 @@
 			window.feedback.form[f].elem[0].tagName				=	'input';
 			window.feedback.form[f].elem[0].tagType				=	'text'; //'number';
 			window.feedback.form[f].elem[0].tagPlaceholder		=	'John Smith';						
-			window.feedback.form[f].elem[0].tagClass			=	'form-control';															
+			window.feedback.form[f].elem[0].tagClass			=	'form-control';
+			window.feedback.form[f].elem[0].tagTitleTooltip		=	'How can we apply to you?';				
 			
 			//[0][1] Data for кнопка 'Type of the user:',  form element, select, type: multiple
 			window.feedback.form[f].elem[1]						=	{};				
@@ -297,6 +299,352 @@
 		return;
 	}
 	
+
+//Define	Function to setup data for feedback url-form-element-option blocks
+	function setFeedbackFormContentF3(f){
+			
+			window.feedback.host								=	location.host;
+			window.feedback.pathname							=	location.pathname;
+			
+			window.feedback.form[f]								=	{};
+			window.feedback.form[f].email						=	[];
+			window.feedback.form[f].email[0]					=	{};
+			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+			window.feedback.form[f].email[0].chatId				=	'463530275';
+			window.feedback.form[f].email[0].toEmail			=	'';
+			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
+			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
+			window.feedback.form[f].email[0].topic				=	'Thank you for the message';
+			window.feedback.form[f].email[0].message			=	''	+														
+			'Hi,' 				+	'<br />' + '<br />'	+
+				'Thank you for your message.'			+ '<br />' +
+				'We will contact with you as soon as possible.' + '<br />' + '<br />' +
+				'Sincerely yours,' 						+ '<br />' +
+				'Roman Cheskidov' 						+ '<br />' +
+				'+1 650 7410014' 						+ '<br />' +
+				'Skype: rootstem'						+ '<br />' +
+				'http://r1.userto.com'					+ '<br />' +
+													'<br />' +				
+													'<br />' +		
+													'<br />' +
+									'<p style="color: grey;">'	+	
+									'If you send this request with the media: ' + 'r1@userto.com' + ' '+
+									'by mistake, please, send reply letter with subject "Cancel the request".'	+
+									'</p>';			
+
+			//Data for 			
+			window.feedback.form[f].elem	= [
+				{	id					:	0,
+					nameInternal		:	'Supersystem-select',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Area'},
+							{'optInnerHTML'	: 'Mechanical'},
+							{'optInnerHTML'	: 'Biological'},
+							{'optInnerHTML'	: 'Chemical'},
+							{'optInnerHTML'	: 'Mathematical'},
+							{'optInnerHTML'	: 'Social'},
+							{'optInnerHTML'	: 'Economical'}]
+				},			
+				{	id					:	1,
+					nameInternal		:	'Supersystem-name',
+					labelInnerHTML		:	'name',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'text',
+					tagClass			:	'form-control',
+					tagStyle			:	'height: 2.5em;',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Assign a name'
+				},
+				{	id					:	2,
+					nameInternal		:	'Supersystem-description',
+					labelInnerHTML		:	'description',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'',
+					tagClass			:	'form-control  w-22-em h-4-em',
+					tagStyle			:	'',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Space for a description'
+				},
+				{	id					:	3,
+					nameInternal		:	'System-select',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Area'},
+							{'optInnerHTML'	: 'Mechanical'},
+							{'optInnerHTML'	: 'Biological'},
+							{'optInnerHTML'	: 'Chemical'},
+							{'optInnerHTML'	: 'Mathematical'},
+							{'optInnerHTML'	: 'Social'},
+							{'optInnerHTML'	: 'Economical'}]
+				},			
+				{	id					:	4,
+					nameInternal		:	'System-name',
+					labelInnerHTML		:	'name',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'text',
+					tagClass			:	'form-control',
+					tagStyle			:	'height: 2.5em;',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Assign a name'
+				},
+				{	id					:	5,
+					nameInternal		:	'System-description',
+					labelInnerHTML		:	'description',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'',
+					tagClass			:	'form-control  w-22-em h-4-em',
+					tagStyle			:	'',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Space for a description'
+				},
+				{	id					:	6,
+					nameInternal		:	'Siblin-select',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagStyle			:	'',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Area'},
+							{'optInnerHTML'	: 'Mechanical'},
+							{'optInnerHTML'	: 'Biological'},
+							{'optInnerHTML'	: 'Chemical'},
+							{'optInnerHTML'	: 'Mathematical'},
+							{'optInnerHTML'	: 'Social'},
+							{'optInnerHTML'	: 'Economical'}]
+				},			
+				{	id					:	7,
+					nameInternal		:	'Siblin-name',
+					labelInnerHTML		:	'name',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'text',
+					tagClass			:	'form-control',
+					tagStyle			:	'height: 2.5em;',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Assign a name'
+				},
+				{	id					:	8,
+					nameInternal		:	'Siblin-description',
+					labelInnerHTML		:	'description',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'',
+					tagClass			:	'form-control w-18-em h-4-em',
+					tagStyle			:	'',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Space for a description'
+				},
+				{	id					:	9,
+					nameInternal		:	'Subsystem-select',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Area'},
+							{'optInnerHTML'	: 'Mechanical'},
+							{'optInnerHTML'	: 'Biological'},
+							{'optInnerHTML'	: 'Chemical'},
+							{'optInnerHTML'	: 'Mathematical'},
+							{'optInnerHTML'	: 'Social'},
+							{'optInnerHTML'	: 'Economical'}]
+				},			
+				{	id					:	10,
+					nameInternal		:	'Subsystem-name',
+					labelInnerHTML		:	'name',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'text',
+					tagClass			:	'form-control',
+					tagStyle			:	'height: 2.5em;',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Assign a name'
+				},
+				{	id					:	11,
+					nameInternal		:	'Subsystem-description',
+					labelInnerHTML		:	'description',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'',
+					tagClass			:	'form-control w-22-em h-4-em',
+					tagStyle			:	'',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Space for a description'
+				},
+				{	id					:	12,
+					nameInternal		:	'Interaction System-Supersystem polarity',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Polarity'},					
+							{'optInnerHTML'	: 'Negative'},
+							{'optInnerHTML'	: 'Neutral'},
+							{'optInnerHTML'	: 'Positive'}]
+				},			
+				{	id					:	13,
+					nameInternal		:	'Interaction System-Supersystem direction',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Direction'},
+							{'optInnerHTML'	: 'To system'},
+							{'optInnerHTML'	: 'From system'}]
+				},
+				{	id					:	14,
+					nameInternal		:	'Interaction System-Supersystem description',
+					labelInnerHTML		:	'description',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'',
+					tagClass			:	'form-control w-22-em h-4-em',
+					tagStyle			:	'',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Space for a description'
+				},
+				{	id					:	15,
+					nameInternal		:	'Interaction System-Siblin polarity',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Polarity'},					
+							{'optInnerHTML'	: 'Negative'},
+							{'optInnerHTML'	: 'Neutral'},
+							{'optInnerHTML'	: 'Positive'}]
+				},			
+				{	id					:	16,
+					nameInternal		:	'Interaction System-Siblin direction',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Direction'},
+							{'optInnerHTML'	: 'To system'},
+							{'optInnerHTML'	: 'From system'}]
+				},
+				{	id					:	17,
+					nameInternal		:	'Interaction System-Siblin description',
+					labelInnerHTML		:	'description',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'',
+					tagClass			:	'form-control w-22-em h-4-em',
+					tagStyle			:	'',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Space for a description'
+				},
+				{	id					:	18,
+					nameInternal		:	'Interaction System-Subsystem polarity',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Polarity'},					
+							{'optInnerHTML'	: 'Negative'},
+							{'optInnerHTML'	: 'Neutral'},
+							{'optInnerHTML'	: 'Positive'}]
+				},			
+				{	id					:	19,
+					nameInternal		:	'Interaction System-Subsystem direction',
+					labelInnerHTML		:	'type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'',
+					tagOption			:	[
+							{'optInnerHTML'	: 'Direction'},
+							{'optInnerHTML'	: 'To system'},
+							{'optInnerHTML'	: 'From system'}]
+				},
+				{	id					:	20,
+					nameInternal		:	'Interaction System-Subsystem description',
+					labelInnerHTML		:	'description',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'',
+					tagClass			:	'form-control w-22-em h-4-em',
+					tagStyle			:	'',
+					tagRequired			:	'',
+					tagPlaceholder		:	'Space for a description'
+				},
+				{	id					:	21,
+					nameInternal		:	'Button submit',
+					tagName				:	'button',
+					tagType				:	'submit-modal',
+					tagInnerHTML		:	'Send',
+					tagClass			:	'btn btn-success btn-lg w-10-em',
+					tagStyle			:	'',
+					modalNum			:	'0'
+				},
+				{	id					:	22,
+					nameInternal		:	'Button reset',
+					tagName				:	'button',
+					tagType				:	'reset',
+					tagInnerHTML		:	'Reset',
+					tagClass			:	'btn btn-light btn-lg',
+					tagStyle			:	''
+				}
+			];
+
+
+		/*	
+			//Data for кнопка 'Отправить', [3] form element, button, type: submit-modal
+			window.feedback.form[f].elem[4]						=	{};			
+			window.feedback.form[f].elem[4].tagName				=	'button';
+			window.feedback.form[f].elem[4].tagType				=	'submit-modal';
+			window.feedback.form[f].elem[4].tagInnerHTML		=	'Send';
+			window.feedback.form[f].elem[4].tagClass			=	'btn btn-success w-8-em';
+			window.feedback.form[f].elem[4].modalNum			=	'0';
+
+			//Data for кнопка 'Очистить', [4] form element, button, type: reset
+			window.feedback.form[f].elem[5]						=	{};			
+			window.feedback.form[f].elem[5].tagName				=	'button';
+			window.feedback.form[f].elem[5].tagType				=	'reset';
+			window.feedback.form[f].elem[5].tagInnerHTML		=	'Reset';
+			window.feedback.form[f].elem[5].tagClass			=	'btn btn-light';
+		*/
+		return;
+	}
+
+
 	
 
 //Define	Function to add contacts to a page
@@ -323,9 +671,9 @@
 								<div class="row p-t-2">\
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">\
 										<p class="m-t-0-em m-b-0-em p-t-0p5-em p-b-0p5-em verticalAlignParent">\
-											<i class="fa fa-phone fa-2x sr-contact" data-toggle="tooltip" title="Phone" data-placement="top"></i>&nbsp;\
-											<i class="fa fa-phone-square fa-2x sr-contact" data-toggle="tooltip" title="Viber" data-placement="top"></i>&nbsp;\
-											<i class="fa fa-telegram fa-2x sr-contact" data-toggle="tooltip" title="Telegram" data-placement="top"></i>&nbsp;\
+											<i class="fa fa-phone fa-2x sr-contact" data-toggle="tooltip" title="Phone"></i>&nbsp;\
+											<i class="fa fa-phone-square fa-2x sr-contact" data-toggle="tooltip" title="Viber"></i>&nbsp;\
+											<i class="fa fa-telegram fa-2x sr-contact" data-toggle="tooltip" title="Telegram"></i>&nbsp;\
 											&nbsp;&nbsp;&nbsp;<span class="verticalAlignChild">\
 											+1 650 7410014<br />\
 											</span></p>\
@@ -590,7 +938,45 @@
 	}
 
 	
-	
+//Define	Function to setup a modal window for confirmatin
+	function setForm3Modal0(f){	
+		
+			var parentNode	=	document.body || document.getElementsByTagName('body')[0];	
+				
+			var nodeInnerHTML	=
+				'<!-- The Modal -->\
+				<div class="modal fade" id="userto-form-3-modal-0">\
+					<div class="modal-dialog">\
+						<div class="modal-content">\
+						<!-- Modal Header -->\
+						<div class="modal-header">\
+						<div class="h4 d-i-b modal-title">Thank you for the message</div>\
+						<button type="button" class="close" data-dismiss="modal">&times;</button>\
+						</div>\
+						<!-- Modal body -->\
+						<div class="modal-body">\
+							<p>I will reply as soon as possible</p>\
+						</div>\
+						<!-- Modal footer -->\
+						<div class="modal-footer">\
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\
+						</div>\
+						</div>\
+					</div>\
+				</div>';
+			
+			var node = document.createElement('div');
+				node.setAttribute('id','modalContainer');
+				node.className	=	'';
+				node.style		=	'';
+				node.role		=	'';
+				node.innerHTML	=	nodeInnerHTML;
+				
+				insertAppendNode(parentNode, node, 'append');	
+		
+		return;
+
+	}	
 	
 	
 //Run scripts
@@ -607,13 +993,19 @@
 		
 		//For demo feedback form
 		setFeedbackFormContentF2(2);
-						
+
+		//For Triz Language Forms prototype
+		setFeedbackFormContentF3(3);
+
+		
 		//Contact block adding
 		contactAddingToPages();
 		setForm0Modal0(0);
 		
 		setForm1Modal0(1);
 		setForm1Modal1(1);
+
+		setForm3Modal0(3);
 		
 		window.feedback.setFeedbackForm();
 
