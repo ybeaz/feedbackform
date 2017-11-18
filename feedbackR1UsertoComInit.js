@@ -197,6 +197,107 @@
 		return;
 	}		
 
+	
+		
+//Define	Function to setup data for feedback url-form-element-option blocks
+	function setFeedbackFormContentF2(f){
+			
+			window.feedback.host								=	location.host;
+			window.feedback.pathname							=	location.pathname;
+			
+			window.feedback.form[f]								=	{};
+			window.feedback.form[f].email						=	[];
+			window.feedback.form[f].email[0]					=	{};
+			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+			window.feedback.form[f].email[0].chatId				=	'463530275';
+			window.feedback.form[f].email[0].toEmail			=	'';
+			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
+			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
+			window.feedback.form[f].email[0].topic				=	'Thank you for the message';
+			window.feedback.form[f].email[0].message			=	''	+														
+			'Hi,' 				+	'<br />' + '<br />'	+
+				'Thank you for your message.'			+ '<br />' +
+				'We will contact with you as soon as possible.' + '<br />' + '<br />' +
+				'Sincerely yours,' 						+ '<br />' +
+				'Roman Cheskidov' 						+ '<br />' +
+				'+1 650 7410014' 						+ '<br />' +
+				'Skype: rootstem'						+ '<br />' +
+				'http://r1.userto.com'					+ '<br />' +
+													'<br />' +				
+													'<br />' +		
+													'<br />' +
+									'<p style="color: grey;">'	+	
+									'If you send this request with the media: ' + 'r1@userto.com' + ' '+
+									'by mistake, please, send reply letter with subject "Cancel the request".'	+
+									'</p>';
+
+
+			//Data for 'Name:', [0] form element, input
+			window.feedback.form[f].elem						=	[];							
+			window.feedback.form[f].elem[0]						=	{};				
+			window.feedback.form[f].elem[0].labelInnerHTML		=	'Name';
+			window.feedback.form[f].elem[0].labelClass			=	'control-label';			
+			window.feedback.form[f].elem[0].tagName				=	'input';
+			window.feedback.form[f].elem[0].tagType				=	'text'; //'number';
+			window.feedback.form[f].elem[0].tagPlaceholder		=	'John Smith';						
+			window.feedback.form[f].elem[0].tagClass			=	'form-control';															
+			
+			//[0][1] Data for кнопка 'Type of the user:',  form element, select, type: multiple
+			window.feedback.form[f].elem[1]						=	{};				
+			window.feedback.form[f].elem[1].labelInnerHTML		=	'Telecom type';
+			window.feedback.form[f].elem[1].labelClass			=	'control-label';			
+			window.feedback.form[f].elem[1].tagName				=	'select';
+			window.feedback.form[f].elem[1].tagType				=	'';			
+			window.feedback.form[f].elem[1].tagClass			=	'form-control';
+			window.feedback.form[f].elem[1].tagRequired			=	'required';			
+			window.feedback.form[f].elem[1].tagOption			=	[
+					{'optInnerHTML': 'You like'},
+					{'optInnerHTML': 'Skype'},
+					{'optInnerHTML': 'WhatsApp'},
+					{'optInnerHTML': 'Telegram'},
+					{'optInnerHTML': 'WeChat'},
+					{'optInnerHTML': 'Viber'},
+					{'optInnerHTML': 'Email'},
+					{'optInnerHTML': 'Phone'}					
+				];
+
+			//Data for 'Skype, WhatsApp, Telegram, WeChat, Viber, Email or Phone', [1] form element, input									
+			window.feedback.form[f].elem[2]						=	{};				
+			window.feedback.form[f].elem[2].labelInnerHTML		=	'Number (login)';
+			window.feedback.form[f].elem[2].labelClass			=	'control-label';			
+			window.feedback.form[f].elem[2].tagName				=	'input';
+			window.feedback.form[f].elem[2].tagRequired			=	'required';
+			window.feedback.form[f].elem[2].tagType				=	'text'; //'number';			
+			window.feedback.form[f].elem[2].tagClass			=	'form-control';
+			window.feedback.form[f].elem[2].tagPlaceholder		=	'your contacts';
+
+			//Data for 'Сведения и факты, не указанные ранее:', [2] form element, textarea									
+			window.feedback.form[f].elem[3]						=	{};				
+			window.feedback.form[f].elem[3].labelInnerHTML		=	'Question - commentary';
+			window.feedback.form[f].elem[3].labelClass			=	'control-label';			
+			window.feedback.form[f].elem[3].tagName				=	'textarea';
+			window.feedback.form[f].elem[3].tagClass			=	'textAreaInput h-10-em';
+			window.feedback.form[f].elem[3].tagRequired			=	'required';
+			window.feedback.form[f].elem[3].tagPlaceholder		=	'your message';
+			
+			//Data for кнопка 'Отправить', [3] form element, button, type: submit-modal
+			window.feedback.form[f].elem[4]						=	{};			
+			window.feedback.form[f].elem[4].tagName				=	'button';
+			window.feedback.form[f].elem[4].tagType				=	'submit-modal';
+			window.feedback.form[f].elem[4].tagInnerHTML		=	'Send';
+			window.feedback.form[f].elem[4].tagClass			=	'btn btn-success w-8-em';
+			window.feedback.form[f].elem[4].modalNum			=	'0';
+
+			//Data for кнопка 'Очистить', [4] form element, button, type: reset
+			window.feedback.form[f].elem[5]						=	{};			
+			window.feedback.form[f].elem[5].tagName				=	'button';
+			window.feedback.form[f].elem[5].tagType				=	'reset';
+			window.feedback.form[f].elem[5].tagInnerHTML		=	'Reset';
+			window.feedback.form[f].elem[5].tagClass			=	'btn btn-light';
+		return;
+	}
+	
+	
 
 //Define	Function to add contacts to a page
 	function contactAddingToPages(){
@@ -498,10 +599,14 @@
 	//Run function to fill feedback form
 	setTimeout(function(){
 		
-			//letsTest('Run scripts step-1', /* testId */ '', /* expect */ [window.feedback.form], /* toEqual */ [] );
+		//For footer feedback form
 		setFeedbackFormContentF0(0); 
+		
+		//For callback order feedback form
 		setFeedbackFormContentF1(1);
-			//letsTest('Run scripts step-2', /* testId */ '', /* expect */ [window.feedback.form], /* toEqual */ [] );
+		
+		//For demo feedback form
+		setFeedbackFormContentF2(2);
 						
 		//Contact block adding
 		contactAddingToPages();
@@ -511,7 +616,11 @@
 		setForm1Modal1(1);
 		
 		window.feedback.setFeedbackForm();
+
 		
+		//letsTest('Run scripts step-1', /* testId */ '', /* expect */ [window.feedback.form], /* toEqual */ [] );
 		
 	}, 250);
 })();
+
+		
