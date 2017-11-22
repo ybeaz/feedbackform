@@ -332,6 +332,21 @@
 									'by mistake, please, send reply letter with subject "Cancel the request".'	+
 									'</p>';			
 
+			var libType	= [
+							{'optInnerHTML'	: 'Type'},
+							{'optInnerHTML'	: 'Machanical'},
+							{'optInnerHTML'	: 'Acustical'},
+							{'optInnerHTML'	: 'Thermal'},
+							{'optInnerHTML'	: 'Chemical'},
+							{'optInnerHTML'	: 'Electromagnetic'},
+							{'optInnerHTML'	: 'Optical'},
+							{'optInnerHTML'	: 'Biological'},
+							{'optInnerHTML'	: 'Mathematical'},
+							{'optInnerHTML'	: 'Social'},
+							{'optInnerHTML'	: 'Economical'}
+							];						
+									
+									
 			//Data for 			
 			window.feedback.form[f].elem	= [
 				{	id					:	0,
@@ -342,14 +357,7 @@
 					tagType				:	'',
 					tagClass			:	'form-control',
 					tagRequired			:	'',
-					tagOption			:	[
-							{'optInnerHTML'	: 'Area'},
-							{'optInnerHTML'	: 'Mechanical'},
-							{'optInnerHTML'	: 'Biological'},
-							{'optInnerHTML'	: 'Chemical'},
-							{'optInnerHTML'	: 'Mathematical'},
-							{'optInnerHTML'	: 'Social'},
-							{'optInnerHTML'	: 'Economical'}]
+					tagOption			:	libType
 				},			
 				{	id					:	1,
 					nameInternal		:	'Supersystem-name',
@@ -381,14 +389,7 @@
 					tagType				:	'',
 					tagClass			:	'form-control',
 					tagRequired			:	'',
-					tagOption			:	[
-							{'optInnerHTML'	: 'Area'},
-							{'optInnerHTML'	: 'Mechanical'},
-							{'optInnerHTML'	: 'Biological'},
-							{'optInnerHTML'	: 'Chemical'},
-							{'optInnerHTML'	: 'Mathematical'},
-							{'optInnerHTML'	: 'Social'},
-							{'optInnerHTML'	: 'Economical'}]
+					tagOption			:	libType
 				},			
 				{	id					:	4,
 					nameInternal		:	'System-name',
@@ -421,14 +422,7 @@
 					tagClass			:	'form-control',
 					tagStyle			:	'',
 					tagRequired			:	'',
-					tagOption			:	[
-							{'optInnerHTML'	: 'Area'},
-							{'optInnerHTML'	: 'Mechanical'},
-							{'optInnerHTML'	: 'Biological'},
-							{'optInnerHTML'	: 'Chemical'},
-							{'optInnerHTML'	: 'Mathematical'},
-							{'optInnerHTML'	: 'Social'},
-							{'optInnerHTML'	: 'Economical'}]
+					tagOption			:	libType
 				},			
 				{	id					:	7,
 					nameInternal		:	'Siblin-name',
@@ -460,14 +454,7 @@
 					tagType				:	'',
 					tagClass			:	'form-control',
 					tagRequired			:	'',
-					tagOption			:	[
-							{'optInnerHTML'	: 'Area'},
-							{'optInnerHTML'	: 'Mechanical'},
-							{'optInnerHTML'	: 'Biological'},
-							{'optInnerHTML'	: 'Chemical'},
-							{'optInnerHTML'	: 'Mathematical'},
-							{'optInnerHTML'	: 'Social'},
-							{'optInnerHTML'	: 'Economical'}]
+					tagOption			:	libType
 				},			
 				{	id					:	10,
 					nameInternal		:	'Subsystem-name',
@@ -507,16 +494,13 @@
 				},			
 				{	id					:	13,
 					nameInternal		:	'Interaction System-Supersystem direction',
-					labelInnerHTML		:	'type',
+					labelInnerHTML		:	'field',
 					labelClass			:	'control-label',
 					tagName				:	'select',
 					tagType				:	'',
 					tagClass			:	'form-control',
 					tagRequired			:	'',
-					tagOption			:	[
-							{'optInnerHTML'	: 'Direction'},
-							{'optInnerHTML'	: 'To system'},
-							{'optInnerHTML'	: 'From system'}]
+					tagOption			:	libType
 				},
 				{	id					:	14,
 					nameInternal		:	'Interaction System-Supersystem description',
@@ -545,16 +529,13 @@
 				},			
 				{	id					:	16,
 					nameInternal		:	'Interaction System-Siblin direction',
-					labelInnerHTML		:	'type',
+					labelInnerHTML		:	'field',
 					labelClass			:	'control-label',
 					tagName				:	'select',
 					tagType				:	'',
 					tagClass			:	'form-control',
 					tagRequired			:	'',
-					tagOption			:	[
-							{'optInnerHTML'	: 'Direction'},
-							{'optInnerHTML'	: 'To system'},
-							{'optInnerHTML'	: 'From system'}]
+					tagOption			:	libType
 				},
 				{	id					:	17,
 					nameInternal		:	'Interaction System-Siblin description',
@@ -583,16 +564,13 @@
 				},			
 				{	id					:	19,
 					nameInternal		:	'Interaction System-Subsystem direction',
-					labelInnerHTML		:	'type',
+					labelInnerHTML		:	'field',
 					labelClass			:	'control-label',
 					tagName				:	'select',
 					tagType				:	'',
 					tagClass			:	'form-control',
 					tagRequired			:	'',
-					tagOption			:	[
-							{'optInnerHTML'	: 'Direction'},
-							{'optInnerHTML'	: 'To system'},
-							{'optInnerHTML'	: 'From system'}]
+					tagOption			:	libType
 				},
 				{	id					:	20,
 					nameInternal		:	'Interaction System-Subsystem description',
