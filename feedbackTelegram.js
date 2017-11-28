@@ -1,5 +1,6 @@
 
 
+	
 //Checking if var is empty, see http://javascript.ru/php/empty 
 	function empty		( mixed_var ) {	// Determine whether a variable is empty
 		// 
@@ -53,102 +54,118 @@
 		return;
 	}	
 	
-	
-//Define global object feedback
-	(function(){
-		window.feedback							=	{};
-		window.feedback.host					=	location.host;
-		window.feedback.pathname				=	location.pathname;
-		window.feedback.form					=	[];
-		
-		//letsTest('Define global object feedback', /* testId */ '', /* expect */ [window.feedback.form], /* toEqual */ [] );
-	})();
 
-
-//Define	Function to clean feedback blocks	
-	window.feedback.cleanFeedbackForm				=	function(f){
-		
-			//Loop through tag elements in the form
-			for(var e = 0; e < window.feedback.form[f].elem.length; e++){			
-						
-				if(	window.feedback.form[f].elem[e].tagName === 'select' ||
-					window.feedback.form[f].elem[e].tagName === 'input' ||
-					window.feedback.form[f].elem[e].tagName === 'textarea'){
-										
-					var querySelector		=	'.userto-form-' + f + '-elem-' +  e  + '> select';		
-					var selectArr			=	document.querySelectorAll(querySelector);
-					
-					var selectedStr			=	'';
-					
-					var querySelector		=	'.userto-form-' + f + '-elem-' +  e  + '> input';
-					var inputArr				=	document.querySelectorAll(querySelector);
-					
-					var querySelector		=	'.userto-form-' + f + '-elem-' +  e  + '> textarea';
-					var textareaArr			=	document.querySelectorAll(querySelector);
-
-					
-					//Block for select
-					if	(!empty(selectArr) && !empty(selectArr[0]) ){
-						for (var i = 0; i < selectArr[0].length; i++) {
-							selectArr[0].options[i].selected	=	false;
-						}
-					}				
-					//Block for input
-					if	(!empty(inputArr) && !empty(inputArr[0])){		
-						inputArr[0].value	=	'';
-					}
-					//Block for textarea
-					if	(!empty(textareaArr) && !empty(textareaArr[0])){
-						textareaArr[0].value	=	'';		
+//Deleting styles preventing modal windows to dissapier
+	function deleteModalBackdropStyles(){
+		setTimeout(function(){
+			var	modal_backdrop		=	document.querySelectorAll('.modal-backdrop');
+				if( document.querySelector('.modal-backdrop')){
+					document.querySelector('.modal-backdrop').style.display	=	'none !important';
+					document.querySelector('.modal-backdrop').visibility	=	'hidden !important';
+					document.querySelector('.modal-backdrop').position	=	'relative !important';
+				}
+				
+				console.info('modal_backdrop: ',modal_backdrop);
+			
+				if(modal_backdrop){
+					for(var i = 0; i< modal_backdrop.length; i++){
+						console.info('modal_backdrop: ',i,': ',modal_backdrop[i]);
+						modal_backdrop[i].style.display				=	'none !important';
+						modal_backdrop[i].style.visibility			=	'hidden !important'; 
+						modal_backdrop[i].style.position			=	'relative !important';
 					}
 				}
+			var	modal_				=	document.querySelectorAll('.modal');
+				if( document.querySelector('.modal')){
+					document.querySelector('.modal').backgroundImage	=	'url("http://userto.com/img/BlackTransparentBackground.png")';
+					document.querySelector('.modal').zIndex				=	'1100 !important';
+				}
+				
+				if(modal_){
+				for(var i = 0; i< modal_.length; i++){
+					modal_[i].style.backgroundImage					=	'url("http://userto.com/img/BlackTransparentBackground.png")';
+					modal_[i].style.zIndex							=	'1100 !important';
+				}
 			}
-			
+		},100);
+		
+		return;
+	}
+
+	
+//Define	Function to clean feedback blocks	
+	function cleanFeedbackForm(f){
+	
+		letsTest('cleanFeedbackForm', /* testId */ '', /* expect */ f, /* toEqual */ [] );
+		
+		//Loop through tag elements in the form
+		for(var e = 0; e < window.feedback.form[f].elem.length; e++){			
+					
+			if(	window.feedback.form[f].elem[e].tagName === 'select' ||
+				window.feedback.form[f].elem[e].tagName === 'input' ||
+				window.feedback.form[f].elem[e].tagName === 'textarea'){
+									
+				var querySelector		=	'.userto-form-' + f + '-elem-' +  e  + '> select';		
+				var selectArr			=	document.querySelectorAll(querySelector);
+				
+				var selectedStr			=	'';
+				
+				var querySelector		=	'.userto-form-' + f + '-elem-' +  e  + '> input';
+				var inputArr				=	document.querySelectorAll(querySelector);
+				
+				var querySelector		=	'.userto-form-' + f + '-elem-' +  e  + '> textarea';
+				var textareaArr			=	document.querySelectorAll(querySelector);
+
+				
+				//Block for select
+				if	(!empty(selectArr) && !empty(selectArr[0]) ){
+					for (var i = 0; i < selectArr[0].length; i++) {
+						selectArr[0].options[i].selected	=	false;
+					}
+				}				
+				//Block for input
+				if	(!empty(inputArr) && !empty(inputArr[0])){		
+					inputArr[0].value	=	'';
+				}
+				//Block for textarea
+				if	(!empty(textareaArr) && !empty(textareaArr[0])){
+					textareaArr[0].value	=	'';		
+				}
+			}
+		}
+		
 		return;
 	}
 
 	
 //Define	Function to fill feedback block with html content
-	window.feedback.setFeedbackForm					=	function(){	
+	function setFeedbackForm (){	
 				
-		//Unused. Call the function to set ini content for feedback forms
-			if(	!empty(window.feedback.setFeedbackFormContent)	&&
-				typeof	 window.feedback.setFeedbackFormContent.onChange 	=== "function"){
-				//window.feedback.setFeedbackFormContent(); 
-				//console.info(' window.feedback 1:',window.feedback);
-			}
-			else{
-				//console.info(' window.feedback 2:',window.feedback);
-				//return;
-			}
-
 		//console.info(' window.feedback 3:',window.feedback);
-
-		//Unused. Check if the url is right
-		if( location.host		!=	window.feedback.host || 
-			location.pathname	!=	window.feedback.pathname	){ return;}
-				
+		
 		//console.info(' host:',location.host,' pathname:',location.pathname);
 				
-		//Loop through forms in the page
+		//Loop through obj.forms in the page
 		for(var f = 0; f < window.feedback.form.length; f++){
-			
+
+			window.feedback.form[f].modalStage	=	0;
+		
 			if(empty(window.feedback.form[f]) || empty(window.feedback.form[f].elem)){continue;}
 		
 			//console.info(' window:', window);
 			//var letsTest = module.exports.letsTest();
-			//letsTest('setFeedbackForm', /* testId */ '', /* expect */ window.feedback.form[f], /* toEqual */ [] );
+			//letsTest('setFeedbackwindow.feedback.form', /* testId */ '', /* expect */ window.feedback.form[f], /* toEqual */ [] );
 		
-			//Loop through tag elements in the form
+			//Loop through tag elements in the window.feedback.form
 			for(var e = 0; e < window.feedback.form[f].elem.length; e++){			
 
-				var form = document.querySelector(".userto-form-" + f + "-elem-" + e); //document.getElementById("form-" + f);			
+				var formGroup = document.querySelector(".userto-form-" + f + "-elem-" + e); //document.getElementById("window.feedback.form-" + f);			
 					//See more: http://www.javascriptkit.com/dhtmltutors/css_selectors_api.shtml
-					//console.info('form-',f,'-elem-',e,':',form);
+					//console.info('window.feedback.form-',f,'-elem-',e,':',window.feedback.form);
 				var string	=	'';				
 			
 				//Defence from absent elements in HTML or init object
-				if(	empty(form) || empty(window.feedback.form[f].elem[e])){ continue; }
+				if(	empty(formGroup) || empty(window.feedback.form[f].elem[e])){ continue; }
 
 				//Add label tag with content, if it is
 				if(	window.feedback.form[f].elem[e].tagName != 'button' &&
@@ -172,7 +189,7 @@
 					if( 	 window.feedback.form[f].elem[e].tagName == 'select') { 
 						
 						string	+=	'<select ';
-						string	+=	'id="select-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
 						string	+=	(!empty(window.feedback.form[f].elem[e].tagSelectMultiple)  ? 'multiple ' :  '' ) +
 								(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 							//Select tag css class and style
@@ -224,7 +241,7 @@
 					else if( window.feedback.form[f].elem[e].tagName === 'input') { 
 						
 						string	+=	'<input ';
-						string	+=	'id="input-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
 						string	+=	(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 						//Input css class and style
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
@@ -249,7 +266,7 @@
 					else if( window.feedback.form[f].elem[e].tagName == 'textarea') { 
 						
 						string	+=	'<textarea ';
-						string	+=	'id="textarea-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
 						string	+=	(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 						string	+=	(!empty(window.feedback.form[f].elem[e].tagPlaceholder) ? 
 										'placeholder="'	+ window.feedback.form[f].elem[e].tagPlaceholder + '" ' : '');
@@ -275,7 +292,7 @@
 					else if( 	window.feedback.form[f].elem[e].tagName == 'button') { 
 						
 						string	+=	'<button ';
-						string	+=	'id="button-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
 						
 						//Button css class and style
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
@@ -289,18 +306,9 @@
 							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
 						}
 						
-						//Button to reset forms
-						if(		window.feedback.form[f].elem[e].tagType === 'reset'){
-							string	+=	'onClick="window.feedback.cleanFeedbackForm('  +  f  + '); return false;">';
-						}
 						//Button to submit results only						
-						else if(window.feedback.form[f].elem[e].tagType === 'submit'){
+						if(window.feedback.form[f].elem[e].tagType === 'submit'){
 							if(!empty(window.feedback.form[f].elem[e].modalNum)){
-								string	+=	'onClick="window.feedback.feedbackSend' +  '(' + 
-											f + ',' + 
-											window.feedback.form[f].elem[e].modalNum+ ",'" 	+ 
-											window.feedback.form[f].elem[e].tagType +
-											"'); " + 'return false;" ';
 								string	+=	'data-dismiss="modal" ';
 							}
 						}
@@ -320,11 +328,7 @@
 							if(!empty(window.feedback.form[f].elem[e].modalNum)){
 								string	+=	'data-toggle="modal" data-target="#userto-form-' + f + '-modal-' + 
 											window.feedback.form[f].elem[e].modalNum + '" ';								
-								string	+=	'onClick="window.feedback.feedbackSend'	+  '('	+ 
-											f + ',' + 
-											window.feedback.form[f].elem[e].modalNum+ ",'" 	+ 
-											window.feedback.form[f].elem[e].tagType +
-											"'); " + 'return false;" ';
+
 								string	+=	'data-dismiss="modal" ';			
 							}							
 								string	+=	'>';
@@ -339,7 +343,7 @@
 					//Block for a tag
 					else if( 	window.feedback.form[f].elem[e].tagName == 'a') {					
 						string	+=	'<a ';
-						string	+=	'id="select-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
 						string	+=	'href="#" ';
 						//a css class and style
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
@@ -353,25 +357,15 @@
 							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
 						}
 						
-						//a to reset forms
-						if(		window.feedback.form[f].elem[e].tagType === 'reset'){
-							string	+=	'onClick="window.feedback.cleanFeedbackForm('  +  f  + '); return false;">';
-						}
 						//a to submit results only						
-						else if(window.feedback.form[f].elem[e].tagType === 'submit'){
+						if(window.feedback.form[f].elem[e].tagType === 'submit'){
 							if(!empty(window.feedback.form[f].elem[e].modalNum)){
-								string	+=	'onClick="window.feedback.feedbackSend' +  '(' + 
-											f + ',' + 
-											window.feedback.form[f].elem[e].modalNum+ ",'" 	+ 
-											window.feedback.form[f].elem[e].tagType +
-											"'); " + 'return false;" ';
 								string	+=	'data-dismiss="modal" ';
 							}
 						}
 						//a to call modal window only
 						else if(window.feedback.form[f].elem[e].tagType === 'modal'){
-							if(!empty(window.feedback.form[f].elem[e].modalNum)){
-								
+							if(!empty(window.feedback.form[f].elem[e].modalNum)){								
 								string	+=	'data-toggle="modal" data-target="#userto-form-' + f + '-modal-' + 
 											window.feedback.form[f].elem[e].modalNum + '" ';
 								string	+=	'data-dismiss="modal" ';
@@ -383,12 +377,7 @@
 							//string	+=	'onClick="alert(\'abc\')" ';						
 							if(!empty(window.feedback.form[f].elem[e].modalNum)){
 								string	+=	'data-toggle="modal" data-target="#userto-form-' + f + '-modal-' + 
-											window.feedback.form[f].elem[e].modalNum + '" ';								
-								string	+=	'onClick="window.feedback.feedbackSend'	+  '('	+ 
-											f + ',' + 
-											window.feedback.form[f].elem[e].modalNum+ ",'" 	+ 
-											window.feedback.form[f].elem[e].tagType +
-											"'); " + 'return false;" ';
+											window.feedback.form[f].elem[e].modalNum + '" ';
 								string	+=	'data-dismiss="modal" ';			
 							}							
 								string	+=	'>';
@@ -409,21 +398,57 @@
 							 window.feedback.form[f].elem[e].footerInnerHTML + 
 						'</footer>' :  '' ); 
 
-				//console.info(' string 2:',string);
-					form.innerHTML	=	string;		
+						
+					//Add string with an element html
+					document.querySelector('.userto-form-' + f + '-elem-' + e).innerHTML	= string;		
+					
+						//console.info('document.querySelector(".userto-form-"',f,'"-elem-"',e,')',
+							//document.getElementById (window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e));
+					
+					//Attach events to buttons and a tags
+					if(	!emptyObj(window.feedback.form[f]) && !empty(window.feedback.form[f].elem[e]) &&
+						(window.feedback.form[f].elem[e].tagName === 'button' || 
+						 window.feedback.form[f].elem[e].tagName === 'a')){
+						
+						(function (f, e) {
+							var fVar 	=	f;
+							var mVar	=	(window.feedback.form[f].elem[e].modalNum != undefined ? window.feedback.form[f].elem[e].modalNum : '');
+							var tVar	=	window.feedback.form[f].elem[e].tagType;
+							//letsTest('feedbackForm 01 fVar, mVar, tVar', /* testId */ '', /* expect */ [fVar, mVar, tVar], /* toEqual */ [] );
+							
+							if(		window.feedback.form[f].elem[e].tagType === 'reset'){
+								letsTest('feedbackForm 01 reset', /* testId */ '', /* expect */ [fVar, mVar, tVar], /* toEqual */ [] );
+								document.querySelector('#' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e).
+								addEventListener ("click", function(){cleanFeedbackForm(fVar);}, false);
+							}
+							//a to submit results only						
+							else if(window.feedback.form[f].elem[e].tagType === 'submit' 		||
+									window.feedback.form[f].elem[e].tagType === 'submit-modal'	||
+									window.feedback.form[f].elem[e].tagType === 'modal'){
+								letsTest('feedbackForm 01 submit-modal', /* testId */ '', /* expect */ [fVar, mVar, tVar], /* toEqual */ [] );		
+								document.querySelector('#' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e).
+								addEventListener ("click", function(){feedbackSend(fVar, mVar, tVar);}, false);
+								//console.info('document.getElementById(',window.feedback.form[f].elem[e].tagName,'-',f,'-',e,')',
+								//document.getElementById (window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e));
+							}
+						
+						})(f, e);
+					}
+				
 				
 			}
 			//End of loop over elements
 							
 		}
-		//End of loop over forms
-	
+		//End of loop over window.feedback.forms
+		
+		
 		return;
 	}
 	
 		
 //Define	Function to capture data from form-elements	
-	window.feedback.feedbackCaptureArray			= 	function(f){
+	function feedbackCaptureArray (f){
 		//console.info(' host:',host,' path:', path,' form:',form);
 		
 		var status					=	[];
@@ -431,7 +456,7 @@
 			//console.info(' querySelector:',querySelector);
 				
 		var formGroup				=	document.querySelectorAll(querySelector);
-			//letsTest('1-st feedbackCaptureArray', /* testId */ '', /* expect */ [f, formGroup, window.feedback.form[f]], /* toEqual */ [] );
+			//letsTest('1-st feedbackCaptureArray', /* testId */ '', /* expect */ [f, formGroup, form[f]], /* toEqual */ [] );
 		
 		for(var e = 0; e < formGroup.length; e++){
 		
@@ -468,15 +493,15 @@
 			if( !empty(selectArr) && !empty(selectArr[0]) && window.feedback.form[f].elem[e].tagName === 'select'){
 
 				if(			selectArr[0].selectedIndex	=== -1	&&
-							window.feedback.form[f].elem[e].tagRequired ===  'required'){
+							form[f].elem[e].tagRequired ===  'required'){
 					var alertString	=
-						'Please, check ' +  window.feedback.form[f].elem[e].labelInnerHTML + 
-						'\n\nОтметьте проверьте пожалуйста ' +  window.feedback.form[f].elem[e].labelInnerHTML ;
+						'Please, check ' +  form[f].elem[e].labelInnerHTML + 
+						'\n\nОтметьте проверьте пожалуйста ' +  form[f].elem[e].labelInnerHTML ;
 					alert(alertString);
 					status[ e]	= 	0;
 				}
 				else if(		selectArr[0].selectedIndex	=== -1	&&
-							window.feedback.form[f].elem[e].tagRequired !=  'required'){
+							form[f].elem[e].tagRequired !=  'required'){
 					window.feedback.form[f].elem[e].label		=	label;
 					window.feedback.form[f].elem[e].tagValue	=	'No data';
 					window.feedback.form[f].elem[e].string		=	window.feedback.form[f].elem[e].label + ' ' + 'No data';
@@ -580,7 +605,7 @@
 					window.feedback.form[f].elem[e].tagValue	=	inputArr[0].value;
 					window.feedback.form[f].elem[e].string 		=	window.feedback.form[f].elem[e].label + ' ' + window.feedback.form[f].elem[e].tagValue;
 					
-					//letsTest('Input feedbackCaptureArray', /* testId */ '', /* expect */ [f, e, inputArr[0].value, window.feedback.form], /* toEqual */ [] );
+					//letsTest('Input feedbackCaptureArray', /* testId */ '', /* expect */ [f, e, inputArr[0].value, form], /* toEqual */ [] );
 				
 					status[e]	= 	1;
 				}
@@ -641,20 +666,21 @@
 
 
 //Define	Function to process feedback capture array into string  
-	window.feedback.feedbackCaptureString			=	function(f){
+	function feedbackCapture(f){
 		
 		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ [window.feedback.form[f]], /* toEqual */ [] );
 		
 		
-		window.feedback.captureStr	=	'';
-		
-		if(	!empty(window.feedback.form[f].email[0].userEmail)){
-			window.feedback.captureStr	+=	'Email: ' + window.feedback.form[f].email[0].userEmail + '<br />';
+		var capture			=	{};
+			capture.str		=	'';
+			capture.tlgrm	=	'';
+			
+		if(	!empty(window.feedback.form) && !empty(window.feedback.form[f]) &&
+			!empty(window.feedback.form[f].email) && !empty(window.feedback.form[f].email[0]) &&
+			!empty(window.feedback.form[f].email[0].userEmail)){
+			capture.str		+=	'Email: ' + window.feedback.form[f].email[0].userEmail + '<br />';
 		}
 
-		window.feedback.captureStrTlgrm	=	'';
-
-		
 		for(var e = 0; e < window.feedback.form[f].elem.length; ++e){
 			
 			if(	!empty(window.feedback.form[f].elem[e]) && 
@@ -663,21 +689,22 @@
 				
 				//console.info(window.feedback.form[f].email[0].toEmail.match(/^([\S]{1,})@([\S]{1,}).([^.]{2,})$/gi) );
 								
-				window.feedback.captureStr	+= ' ' + window.feedback.form[f].elem[e].string + '<br />';
+				capture.str	+= ' ' + window.feedback.form[f].elem[e].string + '<br />';
 				
-				window.feedback.captureStrTlgrm	+= '<i>' + window.feedback.form[f].elem[e].label + '</i> '  +
+				capture.tlgrm	+= '<i>' + window.feedback.form[f].elem[e].label + '</i> '  +
 					' ' + window.feedback.form[f].elem[e].tagValue + '\n';				
 			}
 		}
 		
 		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ window.feedback.form[f].elem, /* toEqual */ [] );
-		//console.info(' window.feedback.captureStr:',window.feedback.captureStr);
-		return;
+		//console.info(' captureStr:',captureStr);
+		
+		return capture;
 	}
 
 
 //Define	Function to send feedback
-	window.feedback.feedbackSend					= 	function(f, m, t){
+	function feedbackSend (f, m, t){
 		/* input:	f	-	form number-index
 					m	-	modul window number
 					t	-	type of modal window
@@ -685,29 +712,37 @@
 		*/
 		//event.preventDefault();
 		
-		//letsTest('3-step feedbackSend window.feedback.form', /* testId */ '', /* expect */ [f, m, t,window.feedback.form], /* toEqual */ [] );
+		letsTest('3-step feedbackSend form', /* testId */ '', /* expect */ [f, m, t], /* toEqual */ [] );
+
 		
-		
-		if( typeof window.feedback === 'object' && typeof window.feedback.setFeedbackFormContent === 'function'){
-			window.feedback.setFeedbackFormContent();
+		if(		t === 'reset'){
+			return;
+		}
+		else if(t === 'modal'){
+
+			var feedbackCaptureArr	=	0;
+		}
+		else{
+			var feedbackCaptureArr	=	feedbackCaptureArray(f);
 		}
 		
-		var feedbackCaptureArray	=	window.feedback.feedbackCaptureArray(f);
 		
-		//letsTest('3-step feedbackSend feedbackCaptureArray', /* testId */ '', /* expect */ feedbackCaptureArray, /* toEqual */ [] );
 		
-		if(feedbackCaptureArray	==	0){
+		//letsTest('3-step feedbackSend feedbackCaptureArr', /* testId */ '', /* expect */ feedbackCaptureArr, /* toEqual */ [] );
+		
+		if(feedbackCaptureArr		==	0){
 			
 			var parentModalWindow	=	document.querySelector('#modalContainer' );
-			var modalWindow 			= 	document.querySelector('#userto-form-' + f + '-modal-' + m );
+			var modalWindow 		= 	document.querySelector('#userto-form-' + f + '-modal-' + m );
 
-			//NEW window.feedback.cleanFeedbackForm();
 			
-			//console.info('1-step #userto-form-' + f + '-modal-' + m,' modalWindow:',modalWindow);
+			//NEW cleanFeedbackForm();
+			
+			console.info('1-step #userto-form-' + f + '-modal-' + m,' modalWindow:',modalWindow);
 			
 			//Remove modalWindow in order not to display in the case of input error
-			if (!empty(modalWindow) && !empty(modalWindow.parentNode)) { modalWindow.parentNode.removeChild(modalWindow);} //?
-			//console.info('2-step #userto-form-' + f + '-modal-' + m,' modalWindow:',modalWindow);
+			if (!empty(modalWindow) && !empty(modalWindow.parentNode)) { modalWindow.parentNode.removeChild(modalWindow);}
+			console.info('2-step #userto-form-' + f + '-modal-' + m,' modalWindow:',modalWindow);
 
 			
 			//Restore modalWindow for the next step of input
@@ -716,30 +751,30 @@
 				if (!empty(parentModalWindow)) {
 					
 					insertAppendNode(parentModalWindow, modalWindow, 'insert'); //?
-					window.feedback.setFeedbackForm();
-					
-					//letsTest('4-step window.feedback.feedbackSend f,m', /* testId */ '', /* expect */ {'name': '#userto-form-' + f + '-modalWindow-' + m, 'parentModalWindow': parentModalWindow}, /* toEqual */ [] );
+					setFeedbackForm();
+						
+					//letsTest('4-step feedbackSend f,m', /* testId */ '', /* expect */ {'name': '#userto-form-' + f + '-modalWindow-' + m, 'parentModalWindow': parentModalWindow}, /* toEqual */ [] );
 					if(	m > 0){
 						var mM1	=	(window.feedback.form[f].modalStage).toString();
-						//letsTest('window.feedback.feedbackSend mM1', /* testId */ '', /* expect */ mM1, /* toEqual */ [] );
+						letsTest('feedbackSend mM1', /* testId */ '', /* expect */ mM1, /* toEqual */ [] );
 						jQuery('#userto-form-' + f + '-modal-' + mM1).modal("toggle");
 					}
 				}
-			},100);
+			},250);
 			
 			//Terminate sending date from the form in the case of input error
 			return;
 		}
 		
 		
-		if(t === 'modal' && feedbackCaptureArray	!=	0){
+		if(t === 'modal' && feedbackCaptureArr	!=	0){
 			
 			window.feedback.form[f].modalStage = m + 1;
-			
+			return;
 		}
 		
 		
-		window.feedback.feedbackCaptureString(f);
+		var capture = feedbackCapture(f);
 		//Stop sending email, if user does not fill all fields
 
 		//console.info(' window.feedback.form[',f,']:',window.feedback.form[f]);
@@ -757,11 +792,11 @@
 		//console.info(' window.feedback.form[',f,'].email[0].messageTlgrm Before:',window.feedback.form[f].email[0].messageTlgrm);
 			window.feedback.form[f].email[0].messageTlgrm	+=							
 				
-					window.feedback.captureStrTlgrm	+ '\n' +
+					capture.tlgrm	+ '\n' +
 	
 					'Page:\n'					+
-					window.feedback.host		+	
-					window.feedback.pathname;					
+					window.host		+	
+					window.pathname;					
 									
 				//'<a href="http://r1.userto.com/demoResizeFeedbackField.php" target="_blank">'+'Source site</a>';							
 				
@@ -781,12 +816,12 @@
 				'<br />' 	+
 				'<br />' 	+
 				'<p>' 		+
-					window.feedback.captureStr	+
+					capture.str	+
 				'</p>'		+
 				'<p style="">' 	+
 					'Page: '					+
-					window.feedback.host		+	
-					window.feedback.pathname	+
+					window.host		+	
+					window.pathname	+
 				'</p>';					
 									
 		var txt	=		window.feedback.form[f].email[0].topic 		+ '\n' +				
@@ -794,7 +829,7 @@
 		//console.info(' f',f,' window.feedback.form[f].email[0]:',window.feedback.form[f].email[0]);
 		//window.feedback.form[f].email[0].toEmail = 't3531350@yahoo.com';
 
-		//letsTest('feedbackSend 4-step ', /* testId */ '', /* expect */ [f, m, t,window.feedback.form], /* toEqual */ [] );
+		//letsTest('feedbackSend 4-step ', /* testId */ '', /* expect */ [f, m, t,form], /* toEqual */ [] );
 		jQuery.ajax({
 			type: 			'POST',
 			url: 			'http://userto.com/php/phpGetPost.php',
@@ -813,8 +848,8 @@
 			success: function(echo){
 					
 					//Form reset
-					window.feedback.setFeedbackForm();					
-					window.feedback.cleanFeedbackForm(f)
+					setFeedbackForm();					
+					cleanFeedbackForm(f)
 					//alert(echo);
 					//console.info('email echo: ',echo);
 				}
@@ -824,8 +859,11 @@
 	}	
 	
 
-//Script in order Bootstrap tooltips work https://codepen.io/imoddesign/pen/laoAE
-	$(function(){
+	
+	
+	
+/* Script in order Bootstrap tooltips work https://codepen.io/imoddesign/pen/laoAE */
+	jQuery(function(){
 		setTimeout(function(){
 			var options = {
 				placement: function (context, element) {

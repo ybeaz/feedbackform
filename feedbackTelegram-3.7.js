@@ -816,7 +816,7 @@
 					window.feedback.setFeedbackForm();					
 					window.feedback.cleanFeedbackForm(f)
 					//alert(echo);
-					//console.info('email echo: ',echo);
+					console.info('email echo: ',echo);
 				}
 		});			
 				
