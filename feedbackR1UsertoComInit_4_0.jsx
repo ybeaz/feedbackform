@@ -4,8 +4,112 @@
 //Define	Function to setup data for feedback url-form-element-option blocks
 	function setFeedbackFormContentF0(f){
 			
-			window.feedback.host								=	location.host;
-			window.feedback.pathname							=	location.pathname;
+			window.feedback.form[f]								=	{};
+			window.feedback.form[f].email						=	[];
+			window.feedback.form[f].email[0]					=	{};
+			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+			window.feedback.form[f].email[0].chatId				=	'463530275';
+			window.feedback.form[f].email[0].toEmail			=	'';
+			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
+			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
+			window.feedback.form[f].email[0].topic				=	'Thank you for the message';
+			window.feedback.form[f].email[0].message			=	''	+														
+			'Hi,' 				+	'<br />' + '<br />'	+
+				'Thank you for your message.'			+ '<br />' +
+				'I will answer you as soon as possible.' + '<br />' + '<br />' +
+				'Sincerely yours,' 						+ '<br />' +
+				'Roman Cheskidov' 						+ '<br />' +
+				'+1 650 7410014' 						+ '<br />' +
+				'Skype: rootstem'						+ '<br />' +
+				'http://r1.userto.com'					+ '<br />' +
+													'<br />' +				
+													'<br />' +		
+													'<br />' +
+									'<p style="color: grey;">'	+	
+									'If you send this request with the media: ' + 'r1@userto.com' + ' '+
+									'by mistake, please, send reply letter with subject "Cancel the request".'	+
+									'</p>';
+
+			var telecomType	=	[{'optInnerHTML': 'You like'},
+								 {'optInnerHTML': 'Skype'},
+								 {'optInnerHTML': 'WhatsApp'},
+								 {'optInnerHTML': 'Telegram'},
+								 {'optInnerHTML': 'WeChat'},
+								 {'optInnerHTML': 'Viber'},
+								 {'optInnerHTML': 'Email'},
+								 {'optInnerHTML': 'Phone'}					
+								];						
+			
+			//Data for 			
+			window.feedback.form[f].elem	= [
+				{	id					:	0,
+					nameInternal		:	'Data for Name, form element, input',
+					labelInnerHTML		:	'Name',
+					labelClass			:	'control-label',
+					tagName				:	'input',
+					tagType				:	'text',
+					tagClass			:	'form-control',
+					tagRequired			:	'required',
+					tagPlaceholder		:	'John Smith',
+					tagTitleTooltip		:	'How can we apply to you?'
+				},			
+				{	id					:	1,
+					nameInternal		:	'Data for кнопка Type of the user:,  form element, select, type: multiple',
+					labelInnerHTML		:	'Telecom type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'required',
+					tagOption			:	telecomType
+				},						
+				{	id					:	2,
+					nameInternal		:	'Data for Skype, WhatsApp, Telegram, WeChat, Viber, Email or Phone, form element, input',
+					labelInnerHTML		:	'Number (login)',
+					labelClass			:	'control-label',
+					tagName				:	'input',
+					tagType				:	'text',
+					tagClass			:	'form-control',
+					tagRequired			:	'required',
+					tagPlaceholder		:	'your contacts',
+					tagTitleTooltip		:	'your contacts'
+				},
+				{	id					:	3,
+					nameInternal		:	'Data for Questions - commentary, form element, textarea',
+					labelInnerHTML		:	'Question - commentary',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'text',
+					tagClass			:	'w-100 b-r-0p4-em p-a-0p5-em h-10-em',
+					tagRequired			:	'required',
+					tagPlaceholder		:	'your message',
+					tagTitleTooltip		:	'your message'
+				},
+				{	id					:	4,
+					nameInternal		:	'Data for button Send, form element, button, type: submit-modal',
+					tagName				:	'button',
+					tagType				:	'submit-modal',
+					tagInnerHTML		:	'Send',
+					tagClass			:	'btn btn-success w-8-em',
+					tagStyle			:	'',
+					modalNum			:	'0'
+				},
+				{	id					:	5,
+					nameInternal		:	'Data for button Reset, form element, button, type: reset',
+					tagName				:	'button',
+					tagType				:	'reset',
+					tagInnerHTML		:	'Reset',
+					tagClass			:	'btn btn-light',
+					tagStyle			:	''
+				}				
+			];
+			
+		return;
+	}
+
+
+//Define	Function to setup data for feedback url-form-element-option blocks
+	function setFeedbackFormContentF1(f){
 			
 			window.feedback.form[f]								=	{};
 			window.feedback.form[f].email						=	[];
@@ -33,178 +137,95 @@
 									'by mistake, please, send reply letter with subject "Cancel the request".'	+
 									'</p>';
 
-
-			//Data for 'Name:', [0] form element, input
-			window.feedback.form[f].elem						=	[];							
-			window.feedback.form[f].elem[0]						=	{};				
-			window.feedback.form[f].elem[0].labelInnerHTML		=	'Name';
-			window.feedback.form[f].elem[0].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[0].tagName				=	'input';
-			window.feedback.form[f].elem[0].tagType				=	'text'; //'number';
-			window.feedback.form[f].elem[0].tagPlaceholder		=	'John Smith';						
-			window.feedback.form[f].elem[0].tagClass			=	'form-control';
-			window.feedback.form[f].elem[0].tagTitleTooltip		=	'How can we apply to you?';				
+			var telecomType	=	[{'optInnerHTML': 'You like'},
+								 {'optInnerHTML': 'Skype'},
+								 {'optInnerHTML': 'WhatsApp'},
+								 {'optInnerHTML': 'Telegram'},
+								 {'optInnerHTML': 'WeChat'},
+								 {'optInnerHTML': 'Viber'},
+								 {'optInnerHTML': 'Email'},
+								 {'optInnerHTML': 'Phone'}					
+								];						
 			
-			//[0][1] Data for кнопка 'Type of the user:',  form element, select, type: multiple
-			window.feedback.form[f].elem[1]						=	{};				
-			window.feedback.form[f].elem[1].labelInnerHTML		=	'Telecom type';
-			window.feedback.form[f].elem[1].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[1].tagName				=	'select';
-			window.feedback.form[f].elem[1].tagType				=	'';			
-			window.feedback.form[f].elem[1].tagClass			=	'form-control';
-			window.feedback.form[f].elem[1].tagRequired			=	'required';			
-			window.feedback.form[f].elem[1].tagOption			=	[
-					{'optInnerHTML': 'You like'},
-					{'optInnerHTML': 'Skype'},
-					{'optInnerHTML': 'WhatsApp'},
-					{'optInnerHTML': 'Telegram'},
-					{'optInnerHTML': 'WeChat'},
-					{'optInnerHTML': 'Viber'},
-					{'optInnerHTML': 'Email'},
-					{'optInnerHTML': 'Phone'}					
-				];
-
-			//Data for 'Skype, WhatsApp, Telegram, WeChat, Viber, Email or Phone', [1] form element, input									
-			window.feedback.form[f].elem[2]						=	{};				
-			window.feedback.form[f].elem[2].labelInnerHTML		=	'Number (login)';
-			window.feedback.form[f].elem[2].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[2].tagName				=	'input';
-			window.feedback.form[f].elem[2].tagRequired			=	'required';
-			window.feedback.form[f].elem[2].tagType				=	'text'; //'number';			
-			window.feedback.form[f].elem[2].tagClass			=	'form-control';
-			window.feedback.form[f].elem[2].tagPlaceholder		=	'your contacts';
-
-			//Data for 'Сведения и факты, не указанные ранее:', [2] form element, textarea									
-			window.feedback.form[f].elem[3]						=	{};				
-			window.feedback.form[f].elem[3].labelInnerHTML		=	'Question - commentary';
-			window.feedback.form[f].elem[3].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[3].tagName				=	'textarea';
-			window.feedback.form[f].elem[3].tagClass			=	'w-100 b-r-0p4-em p-a-0p5-em h-10-em ';
-			window.feedback.form[f].elem[3].tagRequired			=	'required';
-			window.feedback.form[f].elem[3].tagPlaceholder		=	'your message';
+			//Data for 			
+			window.feedback.form[f].elem	= [
+				{	id					:	0,
+					nameInternal		:	'Data for Name, form element, input',
+					labelInnerHTML		:	'Name',
+					labelClass			:	'control-label',
+					tagName				:	'input',
+					tagType				:	'text',
+					tagClass			:	'form-control',
+					tagRequired			:	'required',
+					tagPlaceholder		:	'John Smith',
+					tagTitleTooltip		:	'How can we apply to you?'
+				},			
+				{	id					:	1,
+					nameInternal		:	'Data for кнопка Type of the user:,  form element, select, type: multiple',
+					labelInnerHTML		:	'Telecom type',
+					labelClass			:	'control-label',
+					tagName				:	'select',
+					tagType				:	'',
+					tagClass			:	'form-control',
+					tagRequired			:	'required',
+					tagOption			:	telecomType
+				},						
+				{	id					:	2,
+					nameInternal		:	'Data for Skype, WhatsApp, Telegram, WeChat, Viber, Email or Phone, form element, input',
+					labelInnerHTML		:	'Number (login)',
+					labelClass			:	'control-label',
+					tagName				:	'input',
+					tagType				:	'text',
+					tagClass			:	'form-control',
+					tagRequired			:	'required',
+					tagPlaceholder		:	'your contacts',
+					tagTitleTooltip		:	'your contacts'
+				},
+				{	id					:	3,
+					nameInternal		:	'Data for Questions - commentary, form element, textarea',
+					labelInnerHTML		:	'Question - commentary',
+					labelClass			:	'control-label',
+					tagName				:	'textarea',
+					tagType				:	'text',
+					tagClass			:	'w-100 b-r-0p4-em p-a-0p5-em h-10-em',
+					tagRequired			:	'required',
+					tagPlaceholder		:	'your message',
+					tagTitleTooltip		:	'your message'
+				},
+				{	id					:	4,
+					nameInternal		:	'Data for button Send, form element, button, type: submit-modal',
+					tagName				:	'button',
+					tagType				:	'submit-modal',
+					tagInnerHTML		:	'Send',
+					tagClass			:	'btn btn-success w-8-em',
+					tagStyle			:	'',
+					modalNum			:	'1'
+				},
+				{	id					:	5,
+					nameInternal		:	'Data for button Reset, form element, button, type: reset',
+					tagName				:	'button',
+					tagType				:	'reset',
+					tagInnerHTML		:	'Reset',
+					tagClass			:	'btn btn-light',
+					tagStyle			:	''
+				},
+				{	id					:	6,
+					nameInternal		:	'Data for button Ask for callbackь, type: modal',
+					tagName				:	'a',
+					tagType				:	'modal',
+					tagInnerHTML		:	'Ask for callback',
+					tagClass			:	'c-p-Blue-Grey-500',
+					tagStyle			:	'',
+					modalNum			:	'0'
+				}				
+			];
 			
-			//Data for кнопка 'Отправить', [3] form element, button, type: submit-modal
-			window.feedback.form[f].elem[4]						=	{};			
-			window.feedback.form[f].elem[4].tagName				=	'button';
-			window.feedback.form[f].elem[4].tagType				=	'submit-modal';
-			window.feedback.form[f].elem[4].tagInnerHTML		=	'Send';
-			window.feedback.form[f].elem[4].tagClass			=	'btn btn-success w-8-em';
-			window.feedback.form[f].elem[4].modalNum			=	'0';
-
-			//Data for кнопка 'Очистить', [4] form element, button, type: reset
-			window.feedback.form[f].elem[5]						=	{};			
-			window.feedback.form[f].elem[5].tagName				=	'button';
-			window.feedback.form[f].elem[5].tagType				=	'reset';
-			window.feedback.form[f].elem[5].tagInnerHTML		=	'Reset';
-			window.feedback.form[f].elem[5].tagClass			=	'btn btn-light';
 		return;
 	}
 
 
 //Define	Function to setup data for feedback url-form-element-option blocks
-	function setFeedbackFormContentF1(f){
-			
-			window.feedback.host								=	location.host;
-			window.feedback.pathname							=	location.pathname;
-			
-			window.feedback.form[f]								=	{};
-			window.feedback.form[f].email						=	[];
-			window.feedback.form[f].email[0]					=	{};
-			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
-			window.feedback.form[f].email[0].chatId				=	'463530275';
-			window.feedback.form[f].email[0].toEmail			=	'';
-			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
-			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
-			window.feedback.form[f].email[0].topic				=	'Thank you for the request';
-			window.feedback.form[f].email[0].message			=	''	+														
-			'Hi,' 				+	'<br />' + '<br />'	+
-				'Thank you for your request message.'			+ '<br />' +
-				'I will contact you as soon as possible.' + '<br />' + '<br />' +
-				'Sincerely yours,' 						+ '<br />' +
-				'Roman Cheskidov' 						+ '<br />' +
-				'+1 650 7410014' 						+ '<br />' +
-				'Skype: rootstem'						+ '<br />' +
-				'http://r1.userto.com'					+ '<br />' +
-													'<br />' +				
-													'<br />' +		
-													'<br />' +
-									'<p style="color: grey;">'	+	
-									'If you send this request with the media: ' + 'r1@userto.com' + ' '+
-									'by mistake, please, send reply letter with subject "Cancel the request".'	+
-									'</p>';
-
-			window.feedback.form[f].elem						=	[];						
-									
-			//Data for кнопка 'Отправить', [3] form element, button, type: submit-modal	
-			window.feedback.form[f].elem[0]						=	{};			
-			window.feedback.form[f].elem[0].tagName				=	'a';
-			window.feedback.form[f].elem[0].tagType				=	'modal';
-			window.feedback.form[f].elem[0].tagInnerHTML		=	'Ask for callback';
-			window.feedback.form[f].elem[0].tagClass			=	'c-p-Blue-Grey-500';
-			window.feedback.form[f].elem[0].modalNum			=	'0';						
-
-			//Data for 'Name:', [0] form element, input						
-			window.feedback.form[f].elem[1]						=	{};				
-			window.feedback.form[f].elem[1].labelInnerHTML		=	'Your name';
-			window.feedback.form[f].elem[1].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[1].tagName				=	'input';
-			window.feedback.form[f].elem[1].tagType				=	'text'; //'number';
-			window.feedback.form[f].elem[1].tagPlaceholder		=	'John Smith';						
-			window.feedback.form[f].elem[1].tagClass			=	'form-control';
-			window.feedback.form[f].elem[1].tagTitleTooltip		=	'How can we apply to you?';				
-			
-			//[0][1] Data for кнопка 'Type of the user:',  form element, select, type: multiple
-			window.feedback.form[f].elem[2]						=	{};				
-			window.feedback.form[f].elem[2].labelInnerHTML		=	'Telecom type';
-			window.feedback.form[f].elem[2].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[2].tagName				=	'select';
-			window.feedback.form[f].elem[2].tagType				=	'';			
-			window.feedback.form[f].elem[2].tagClass			=	'form-control';
-			window.feedback.form[f].elem[2].tagRequired			=	'required';			
-			window.feedback.form[f].elem[2].tagOption			=	[
-					{'optInnerHTML': 'You like'},
-					{'optInnerHTML': 'Skype'},
-					{'optInnerHTML': 'WhatsApp'},
-					{'optInnerHTML': 'Telegram'},
-					{'optInnerHTML': 'WeChat'},
-					{'optInnerHTML': 'Viber'},
-					{'optInnerHTML': 'Email'},
-					{'optInnerHTML': 'Phone'}					
-				];
-
-			//Data for 'Skype, WhatsApp, Telegram, WeChat, Viber, Email or Phone', [1] form element, input									
-			window.feedback.form[f].elem[3]						=	{};				
-			window.feedback.form[f].elem[3].labelInnerHTML		=	'Number (login)';
-			window.feedback.form[f].elem[3].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[3].tagName				=	'input';
-			window.feedback.form[f].elem[3].tagRequired			=	'required';
-			window.feedback.form[f].elem[3].tagType				=	'text'; //'number';			
-			window.feedback.form[f].elem[3].tagClass			=	'form-control';
-			window.feedback.form[f].elem[3].tagPlaceholder		=	'your contacts';
-			
-			//Data for кнопка 'Отправить', [3] form element, button, type: submit-modal
-			window.feedback.form[f].elem[4]						=	{};			
-			window.feedback.form[f].elem[4].tagName				=	'button';
-			window.feedback.form[f].elem[4].tagType				=	'submit-modal';
-			window.feedback.form[f].elem[4].tagInnerHTML		=	'Send';
-			window.feedback.form[f].elem[4].tagClass			=	'btn btn-success w-8-em';
-			window.feedback.form[f].elem[4].modalNum			=	'1';
-
-			//Data for кнопка 'Очистить', [4] form element, button, type: reset
-			window.feedback.form[f].elem[5]						=	{};			
-			window.feedback.form[f].elem[5].tagName				=	'button';
-			window.feedback.form[f].elem[5].tagType				=	'reset';
-			window.feedback.form[f].elem[5].tagInnerHTML		=	'Reset';
-			window.feedback.form[f].elem[5].tagClass			=	'btn btn-light';
-		return;
-	}		
-
-	
-//Define	Function to setup data for feedback url-form-element-option blocks
 	function setFeedbackFormContentF2(f){
-			
-			window.feedback.host								=	location.host;
-			window.feedback.pathname							=	location.pathname;
 			
 			window.feedback.form[f]								=	{};
 			window.feedback.form[f].email						=	[];
@@ -235,7 +256,8 @@
 
 			//Data for 'Name:', [0] form element, input
 			window.feedback.form[f].elem						=	[];							
-			window.feedback.form[f].elem[0]						=	{};				
+			window.feedback.form[f].elem[0]						=	{};
+			window.feedback.form[f].elem[0].id					=	0;
 			window.feedback.form[f].elem[0].labelInnerHTML		=	'Name';
 			window.feedback.form[f].elem[0].labelClass			=	'control-label';			
 			window.feedback.form[f].elem[0].tagName				=	'input';
@@ -245,7 +267,8 @@
 			window.feedback.form[f].elem[0].tagTitleTooltip		=	'How can we apply to you?';				
 			
 			//[0][1] Data for кнопка 'Type of the user:',  form element, select, type: multiple
-			window.feedback.form[f].elem[1]						=	{};				
+			window.feedback.form[f].elem[1]						=	{};
+			window.feedback.form[f].elem[1].id					=	1;			
 			window.feedback.form[f].elem[1].labelInnerHTML		=	'Telecom type';
 			window.feedback.form[f].elem[1].labelClass			=	'control-label';			
 			window.feedback.form[f].elem[1].tagName				=	'select';
@@ -264,7 +287,8 @@
 				];
 
 			//Data for 'Skype, WhatsApp, Telegram, WeChat, Viber, Email or Phone', [1] form element, input									
-			window.feedback.form[f].elem[2]						=	{};				
+			window.feedback.form[f].elem[2]						=	{};
+			window.feedback.form[f].elem[2].id					=	2;
 			window.feedback.form[f].elem[2].labelInnerHTML		=	'Number (login)';
 			window.feedback.form[f].elem[2].labelClass			=	'control-label';			
 			window.feedback.form[f].elem[2].tagName				=	'input';
@@ -274,7 +298,8 @@
 			window.feedback.form[f].elem[2].tagPlaceholder		=	'your contacts';
 
 			//Data for 'Сведения и факты, не указанные ранее:', [2] form element, textarea									
-			window.feedback.form[f].elem[3]						=	{};				
+			window.feedback.form[f].elem[3]						=	{};
+			window.feedback.form[f].elem[3].id					=	3;
 			window.feedback.form[f].elem[3].labelInnerHTML		=	'Question - commentary';
 			window.feedback.form[f].elem[3].labelClass			=	'control-label';			
 			window.feedback.form[f].elem[3].tagName				=	'textarea';
@@ -283,7 +308,8 @@
 			window.feedback.form[f].elem[3].tagPlaceholder		=	'your message';
 			
 			//Data for кнопка 'Отправить', [3] form element, button, type: submit-modal
-			window.feedback.form[f].elem[4]						=	{};			
+			window.feedback.form[f].elem[4]						=	{};
+			window.feedback.form[f].elem[4].id					=	4;
 			window.feedback.form[f].elem[4].tagName				=	'button';
 			window.feedback.form[f].elem[4].tagType				=	'submit-modal';
 			window.feedback.form[f].elem[4].tagInnerHTML		=	'Send';
@@ -291,7 +317,8 @@
 			window.feedback.form[f].elem[4].modalNum			=	'0';
 
 			//Data for кнопка 'Очистить', [4] form element, button, type: reset
-			window.feedback.form[f].elem[5]						=	{};			
+			window.feedback.form[f].elem[5]						=	{};
+			window.feedback.form[f].elem[5].id					=	5;
 			window.feedback.form[f].elem[5].tagName				=	'button';
 			window.feedback.form[f].elem[5].tagType				=	'reset';
 			window.feedback.form[f].elem[5].tagInnerHTML		=	'Reset';
@@ -302,9 +329,7 @@
 
 //Define	Function to setup data for feedback url-form-element-option blocks
 	function setFeedbackFormContentF3(f){
-			
-			window.feedback.host								=	location.host;
-			window.feedback.pathname							=	location.pathname;
+
 			
 			window.feedback.form[f]								=	{};
 			window.feedback.form[f].email						=	[];
@@ -819,19 +844,19 @@
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">\
 										\
 										<!-- Name: -->\
-										<div id="" class="form-group userto-form-' + f + '-elem-1"></div>\
+										<div id="" class="form-group userto-form-' + f + '-elem-0"></div>\
 									</div>\
 								</div>\
 								<div  class="row">\
 									<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">\
 										\
 										<!-- You like -->\
-										<div id="" class="form-group userto-form-' + f + '-elem-2"></div>\
+										<div id="" class="form-group userto-form-' + f + '-elem-1"></div>\
 									</div>\
 									<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">\
 										\
 										<!-- Number (login) -->\
-										<div id="" class="form-group userto-form-' + f + '-elem-3"></div>\
+										<div id="" class="form-group userto-form-' + f + '-elem-2"></div>\
 									</div>\
 								</div>\
 							</div>\

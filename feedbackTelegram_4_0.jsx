@@ -54,11 +54,35 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 		window.feedback.host					=	location.host;
 		window.feedback.pathname				=	location.pathname;
 		window.feedback.form					=	[];
+
+
+
+
 		
-				
-		//var store	=	createStore(counter);
 		
-		//letsTest('Define global object feedback', /* testId */ '', /* expect */ [window.feedback.form, store.getState()], /* toEqual */ [] );
+		const counter = (store = 0, action) => {
+			switch(action.type){
+				case 'INCREMENT' :	return store +1;
+				case 'DECREMENT' :	return store -1;
+				default:			return 0;
+			}
+		}
+
+		const store = createStore(counter);
+		
+		const render = () => {
+			if( document.querySelector('#textarea-0-3')){
+				document.querySelector('#textarea-0-3').value = store.getState();
+			}
+		}
+		
+		store.subscribe(render);
+		render();
+		
+		document.body.addEventListener('click', () => {store.dispatch({type: 'INCREMENT'})});
+		
+		
+		letsTest('Define global object feedback', /* testId */ '', /* expect */ [window.feedback.form, store.getState()], /* toEqual */ [] );
 	})();	
 	
 //Define	Function to insert node if possible, if not - append
@@ -188,7 +212,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 			//Loop through tag elements in the form
 			for(var e = 0; e < window.feedback.form[f].elem.length; e++){			
 
-				var form = document.querySelector(".userto-form-" + f + "-elem-" + e); //document.getElementById("form-" + f);			
+				var form = document.querySelector(".userto-form-" + f + "-elem-" + window.feedback.form[f].elem[e].id); //document.getElementById("form-" + f);			
 					//See more: http://www.javascriptkit.com/dhtmltutors/css_selectors_api.shtml
 					//console.info('form-',f,'-elem-',e,':',form);
 				var string	=	'';				
@@ -218,7 +242,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 					if( 	 window.feedback.form[f].elem[e].tagName == 'select') { 
 						
 						string	+=	'<select ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
 						string	+=	(!empty(window.feedback.form[f].elem[e].tagSelectMultiple)  ? 'multiple ' :  '' ) +
 								(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 							//Select tag css class and style
@@ -270,7 +294,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 					else if( window.feedback.form[f].elem[e].tagName === 'input') { 
 						
 						string	+=	'<input ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
 						string	+=	(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 						//Input css class and style
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
@@ -295,7 +319,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 					else if( window.feedback.form[f].elem[e].tagName == 'textarea') { 
 						
 						string	+=	'<textarea ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
 						string	+=	(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 						string	+=	(!empty(window.feedback.form[f].elem[e].tagPlaceholder) ? 
 										'placeholder="'	+ window.feedback.form[f].elem[e].tagPlaceholder + '" ' : '');
@@ -321,7 +345,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 					else if( 	window.feedback.form[f].elem[e].tagName == 'button') { 
 						
 						string	+=	'<button ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
 						
 						//Button css class and style
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
@@ -372,7 +396,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 					//Block for a tag
 					else if( 	window.feedback.form[f].elem[e].tagName == 'a') {					
 						string	+=	'<a ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e + '" ';
+						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
 						string	+=	'href="#" ';
 						//a css class and style
 						if(!empty(window.feedback.form[f].elem[e].tagClass)){
@@ -428,10 +452,10 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 						'</footer>' :  '' ); 
 
 					//Add string with an element html
-					document.querySelector('.userto-form-' + f + '-elem-' + e).innerHTML	= string;		
+					document.querySelector('.userto-form-' + f + '-elem-' + window.feedback.form[f].elem[e].id).innerHTML	= string;		
 					
-						//console.info('document.querySelector(".userto-form-"',f,'"-elem-"',e,')',
-							//document.getElementById (window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e));
+						//console.info('document.querySelector(".userto-form-"',f,'"-elem-"',window.feedback.form[f].elem[e].id,')',
+							//document.getElementById (window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id));
 					
 					//Attach events to buttons and a tags
 					if(	!emptyObj(window.feedback.form[f]) && !empty(window.feedback.form[f].elem[e]) &&
@@ -446,17 +470,17 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 							
 							if(		window.feedback.form[f].elem[e].tagType === 'reset'){
 								//letsTest('feedbackForm 01 reset', /* testId */ '', /* expect */ [fVar, mVar, tVar], /* toEqual */ [] );
-								document.querySelector('#' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e).
+								document.querySelector('#' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id).
 								addEventListener ("click", function(){window.feedback.cleanFeedbackForm(fVar);}, false);
 							}
 							//a to submit results only						
 							else if(window.feedback.form[f].elem[e].tagType === 'submit' 		||
 									window.feedback.form[f].elem[e].tagType === 'submit-modal'	){
 								//letsTest('feedbackForm 01 submit-modal', /* testId */ '', /* expect */ [fVar, mVar, tVar], /* toEqual */ [] );		
-								document.querySelector('#' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e).
+								document.querySelector('#' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id).
 								addEventListener ("click", function(){window.feedback.feedbackSend(fVar, mVar, tVar);}, false);
-								//console.info('document.getElementById(',window.feedback.form[f].elem[e].tagName,'-',f,'-',e,')',
-								//document.getElementById (window.feedback.form[f].elem[e].tagName + '-' + f + '-' + e));
+								//console.info('document.getElementById(',window.feedback.form[f].elem[e].tagName,'-',f,'-',window.feedback.form[f].elem[e].id,')',
+								//document.getElementById (window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id));
 							}
 						
 						})(f, e);

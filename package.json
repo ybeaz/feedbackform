@@ -4,7 +4,7 @@
   "description": "feedback telegram",
   "main": "feedbackAgsUsertoComInit.js",
   "scripts": {
-    "ds": "webpack-dev-server --output-public-path=/dist/js/ --port 4000 --inline --history-api-fallback",
+    "ds": "webpack-dev-server --output-public-path=/dist/js/ --port 3020 --inline --history-api-fallback",
     "wpp": "webpack -p",
     "start": "node server.js",
     "watch": "webpack --watch --debug",
