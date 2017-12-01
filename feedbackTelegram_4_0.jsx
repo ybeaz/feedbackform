@@ -10,15 +10,21 @@
 		? SENT_FORM_MESSAGE
 */
 
-import { createStore }		from 'redux';		//const 	{ createStore } 	= require('redux'); 
-import {combineReducers}	from 'redux';		//const 	{combineReducers} 	= require('redux');
-import deepFreeze			from 'deep-freeze';	//var deepFreeze = require('deep-freeze');
+global.jQuery = require('jquery');
+const bootstrap = require('bootstrap');
+//global.jQuery = global.$ = require('jquery')(window);
+
+const 	{ createStore } 	= require('redux');		//import { createStore }		from 'redux';
+const 	{combineReducers} 	= require('redux');		//import {combineReducers}	from 'redux';
+var deepFreeze = require('deep-freeze');			//import deepFreeze			from 'deep-freeze';	
 
 // Import my own testing tool
-import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
+const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 
+	
+	
 //Checking if var is empty, see http://javascript.ru/php/empty 
-	function empty( mixed_var ) {	// Determine whether a variable is empty
+	const empty = ( mixed_var ) => {	// Determine whether a variable is empty
 		// 
 		// +   original by: Philippe Baumann
 
@@ -36,57 +42,93 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 	}
 
 	
-//Checkign if object empty	
+//Checkign if object empty
 	function emptyObj (obj){
-		for(var prop in obj) {
-			if(obj.hasOwnProperty(prop))
-				return false;
+
+		if( typeof	obj === 'undefined'	||
+					obj === undefined	||
+					obj === ''			||
+					obj === null		||
+					obj === false		||
+		   (typeof obj === 'array' && obj.length === 0 )){
+			return true;
 		}
-		return JSON.stringify(obj) === JSON.stringify({});	
+		else{
+			for(var prop in obj) {
+				if(obj.hasOwnProperty(prop))
+					return false;
+			}
+			return JSON.stringify(obj) === JSON.stringify({});
+		}
 	}
 
+	
 
+	const counter = (store = 0, action) => {
+		switch(action.type){
+			case 'INCREMENT' :	return store +1;
+			case 'DECREMENT' :	return store -1;
+			default:			return 0;
+		}
+	}
+
+	
+	const toggleTodo = (todo) => {
+		/*
+		return {
+			id:			todo.id,
+			text:		todo.text,
+			completed:	!todo.completed
+		};
+		*/
+		return Object.assign({},todo, {completed: !todo.completed});		
+	}
+	
+	const todos = (state = [], action) => {
+		
+		switch(action.type){
+			case 'ADDED_TODO': 
+				return [... state, {id: 0, text: action.text, completed: action.completed}];
+			default: return state;
+		}
+		//Object.assign({},state,{id: 0, text: action.text, completed: action.completed})
+	}
+	
+	
+	
+	const store = createStore(counter);
+	
+	const render = () => {
+		if( document.querySelector('#textarea-0-3')){
+			document.querySelector('#textarea-0-3').value = store.getState();
+		}
+	}
+	
+	store.subscribe(render);
+	render();
+	
+	document.body.addEventListener('click', () => {store.dispatch({type: 'INCREMENT'})});
+	
+	
+	//letsTest('Define global object feedback', /* testId */ '', /* expect */ [global.feedback.form, store.getState()], /* toEqual */ [] );
+
+	
+	
+		
 //Define global object feedback
 	(function(){
 		
 		//Add grlobal object feedback
-		window.feedback							=	{};
-		window.feedback.host					=	location.host;
-		window.feedback.pathname				=	location.pathname;
-		window.feedback.form					=	[];
-
-
-
-
-		
-		
-		const counter = (store = 0, action) => {
-			switch(action.type){
-				case 'INCREMENT' :	return store +1;
-				case 'DECREMENT' :	return store -1;
-				default:			return 0;
-			}
-		}
-
-		const store = createStore(counter);
-		
-		const render = () => {
-			if( document.querySelector('#textarea-0-3')){
-				document.querySelector('#textarea-0-3').value = store.getState();
-			}
-		}
-		
-		store.subscribe(render);
-		render();
-		
-		document.body.addEventListener('click', () => {store.dispatch({type: 'INCREMENT'})});
-		
-		
-		letsTest('Define global object feedback', /* testId */ '', /* expect */ [window.feedback.form, store.getState()], /* toEqual */ [] );
+		global.feedback							=	{};
+		global.feedback.host					=	location.host;
+		global.feedback.pathname				=	location.pathname;
+		global.feedback.form					=	[];
+	
 	})();	
 	
+	
 //Define	Function to insert node if possible, if not - append
-	window.feedback.insertAppendNode				=	function(parentNode, node, mode){
+	global.feedback.insertAppendNode				=	function(parentNode, node, mode){
 		//mode 'insert', 'append'
 		
 		if(mode	== 'insert'){
@@ -111,14 +153,14 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 	
 
 //Define	Function to insert node if possible, if not - append
-	window.feedback.appendModalContainer			=	function(){
+	global.feedback.appendModalContainer			=	function(){
 		//Add modalContainer for modal windows
 		if(!document.querySelector('#modalContainer')){
 			var parentNode	=	document.body || document.getElementsByTagName('body')[0];
 			var node = document.createElement('div');
 				node.setAttribute('id','modalContainer');
 				node.setAttribute('name','myNameModalContainer');
-				window.feedback.insertAppendNode(parentNode, node, 'append');
+				global.feedback.insertAppendNode(parentNode, node, 'append');
 				
 			var css =	'.modal-backdrop {display:none;visibility:hidden; position:relative;}' +
 						'.modal{background-image: url("http://userto.com/img/BlackTransparentBackground.png");z-index:100;}';
@@ -129,21 +171,22 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 				} else {
 				  style.appendChild(document.createTextNode(css));
 				}
-				window.feedback.insertAppendNode(node, style, 'append');				
+				global.feedback.insertAppendNode(node, style, 'append');				
 		}
+		return true;
 	}
-	window.feedback.appendModalContainer();
+	global.feedback.appendModalContainer();
 
 	
 //Define	Function to clean feedback blocks	
-	window.feedback.cleanFeedbackForm				=	function(f){
+	global.feedback.cleanFeedbackForm				=	function(f){
 		
 			//Loop through tag elements in the form
-			for(var e = 0; e < window.feedback.form[f].elem.length; e++){			
+			for(var e = 0; e < global.feedback.form[f].elem.length; e++){			
 						
-				if(	window.feedback.form[f].elem[e].tagName === 'select' ||
-					window.feedback.form[f].elem[e].tagName === 'input' ||
-					window.feedback.form[f].elem[e].tagName === 'textarea'){
+				if(	global.feedback.form[f].elem[e].tagName === 'select' ||
+					global.feedback.form[f].elem[e].tagName === 'input' ||
+					global.feedback.form[f].elem[e].tagName === 'textarea'){
 										
 					var querySelector		=	'.userto-form-' + f + '-elem-' +  e  + '> select';		
 					var selectArr			=	document.querySelectorAll(querySelector);
@@ -174,101 +217,102 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 				}
 			}
 			
-		return;
+		return true;
 	}
 
 	
 //Define	Function to fill feedback block with html content
-	window.feedback.setFeedbackForm					=	function(){	
+	global.feedback.setFeedbackForm					=	function(){	
 				
 		//Unused. Call the function to set ini content for feedback forms
-			if(	!empty(window.feedback.setFeedbackFormContent)	&&
-				typeof	 window.feedback.setFeedbackFormContent.onChange 	=== "function"){
-				//window.feedback.setFeedbackFormContent(); 
-				//console.info(' window.feedback 1:',window.feedback);
+			if(	!empty(global.feedback.setFeedbackFormContent)	&&
+				typeof	 global.feedback.setFeedbackFormContent.onChange 	=== "function"){
+				//global.feedback.setFeedbackFormContent(); 
+				//console.info(' global.feedback 1:',global.feedback);
 			}
 			else{
-				//console.info(' window.feedback 2:',window.feedback);
+				//console.info(' global.feedback 2:',global.feedback);
 				//return;
 			}
 
-		//console.info(' window.feedback 3:',window.feedback);
+		//console.info(' global.feedback 3:',global.feedback);
 
-		//Unused. Check if the url is right
-		if( location.host		!=	window.feedback.host || 
-			location.pathname	!=	window.feedback.pathname	){ return;}
-				
+		/* Unused. Check if the url is right
+		if( location.host		!=	global.feedback.host || 
+			location.pathname	!=	global.feedback.pathname	){ return;}
+		*/
+		
 		//console.info(' host:',location.host,' pathname:',location.pathname);
 				
 		//Loop through forms in the page
-		for(var f = 0; f < window.feedback.form.length; f++){
+		for(var f = 0; f < global.feedback.form.length; f++){
 			
-			if(empty(window.feedback.form[f]) || empty(window.feedback.form[f].elem)){continue;}
+			if(empty(global.feedback.form[f]) || empty(global.feedback.form[f].elem)){continue;}
 		
 			//console.info(' window:', window);
 			//var letsTest = module.exports.letsTest();
-			//letsTest('setFeedbackForm', /* testId */ '', /* expect */ window.feedback.form[f], /* toEqual */ [] );
+			//letsTest('setFeedbackForm', /* testId */ '', /* expect */ global.feedback.form[f], /* toEqual */ [] );
 		
 			//Loop through tag elements in the form
-			for(var e = 0; e < window.feedback.form[f].elem.length; e++){			
+			for(var e = 0; e < global.feedback.form[f].elem.length; e++){			
 
-				var form = document.querySelector(".userto-form-" + f + "-elem-" + window.feedback.form[f].elem[e].id); //document.getElementById("form-" + f);			
+				var form = document.querySelector(".userto-form-" + f + "-elem-" + global.feedback.form[f].elem[e].id); //document.getElementById("form-" + f);			
 					//See more: http://www.javascriptkit.com/dhtmltutors/css_selectors_api.shtml
 					//console.info('form-',f,'-elem-',e,':',form);
 				var string	=	'';				
 			
 				//Defence from absent elements in HTML or init object
-				if(	empty(form) || empty(window.feedback.form[f].elem[e])){ continue; }
+				if(	empty(form) || empty(global.feedback.form[f].elem[e])){ continue; }
 
 				//Add label tag with content, if it is
-				if(	window.feedback.form[f].elem[e].tagName != 'button' &&
-					window.feedback.form[f].elem[e].tagName != 'a'){	
+				if(	global.feedback.form[f].elem[e].tagName != 'button' &&
+					global.feedback.form[f].elem[e].tagName != 'a'){	
 					string	+=	'<label ';
 						//Label tag css class and style
-						if(!empty(window.feedback.form[f].elem[e].labelClass)){
-							string	+=	'class="' + window.feedback.form[f].elem[e].labelClass + '" ';
+						if(!empty(global.feedback.form[f].elem[e].labelClass)){
+							string	+=	'class="' + global.feedback.form[f].elem[e].labelClass + '" ';
 						}
-						if(!empty(window.feedback.form[f].elem[e].labelStyle)){
-							string	+=	'style="' + window.feedback.form[f].elem[e].labelStyle + '" ';
+						if(!empty(global.feedback.form[f].elem[e].labelStyle)){
+							string	+=	'style="' + global.feedback.form[f].elem[e].labelStyle + '" ';
 						}
 					string	+=	'>';
-					string	+=	(!empty(window.feedback.form[f].elem[e].labelInnerHTML) ? 
-										window.feedback.form[f].elem[e].labelInnerHTML : '');							
+					string	+=	(!empty(global.feedback.form[f].elem[e].labelInnerHTML) ? 
+										global.feedback.form[f].elem[e].labelInnerHTML : '');							
 					string	+=	'</label>';
 					//console.info(' string 1:',string);
 				}
 				
 					//Block for select tag
-					if( 	 window.feedback.form[f].elem[e].tagName == 'select') { 
+					if( 	 global.feedback.form[f].elem[e].tagName == 'select') { 
 						
 						string	+=	'<select ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
-						string	+=	(!empty(window.feedback.form[f].elem[e].tagSelectMultiple)  ? 'multiple ' :  '' ) +
-								(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
+						string	+=	'id="' + global.feedback.form[f].elem[e].tagName + '-' + f + '-' + global.feedback.form[f].elem[e].id + '" ';
+						string	+=	(!empty(global.feedback.form[f].elem[e].tagSelectMultiple)  ? 'multiple ' :  '' ) +
+								(global.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 							//Select tag css class and style
-							if(!empty(window.feedback.form[f].elem[e].tagClass)){
-								string	+=	'class="' + window.feedback.form[f].elem[e].tagClass + '" ';
+							if(!empty(global.feedback.form[f].elem[e].tagClass)){
+								string	+=	'class="' + global.feedback.form[f].elem[e].tagClass + '" ';
 							}
-							if(!empty(window.feedback.form[f].elem[e].tagStyle)){
-								string	+=	'style="' + window.feedback.form[f].elem[e].tagStyle + '" ';
+							if(!empty(global.feedback.form[f].elem[e].tagStyle)){
+								string	+=	'style="' + global.feedback.form[f].elem[e].tagStyle + '" ';
 							}
-							if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+							if(!empty(global.feedback.form[f].elem[e].tagTitleTooltip)){
 								string	+=	'data-toggle="tooltip" ';
-								string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+								string	+=	'title="' + global.feedback.form[f].elem[e].tagTitleTooltip + '" ';
 							}
 						string	+=	'>';
 						
-							//console.info(' window.feedback.form[',f,'].elem[',e,'].tagOption:',window.feedback.form[f].elem[e].tagOption);
+							//console.info(' global.feedback.form[',f,'].elem[',e,'].tagOption:',global.feedback.form[f].elem[e].tagOption);
 							//Loop through options in the select tag
-							for(var o = 0; o < window.feedback.form[f].elem[e].tagOption.length; o++){
+							for(var o = 0; o < global.feedback.form[f].elem[e].tagOption.length; o++){
 
 								var sel = '';
 								
-								if(!empty(window.feedback.form[f].elem[e].options)){
-									if(	!empty	  (window.feedback.form[f].elem[e].options[o]) &&
-										!emptyObj(window.feedback.form[f].elem[e].options[o])){
-										if(!empty(window.feedback.form[f].elem[e].options[o].selected)){
-											if(window.feedback.form[f].elem[e].options[o].selected === true){
+								if(!empty(global.feedback.form[f].elem[e].options)){
+									if(	!empty	  (global.feedback.form[f].elem[e].options[o]) &&
+										!emptyObj(global.feedback.form[f].elem[e].options[o])){
+										if(!empty(global.feedback.form[f].elem[e].options[o].selected)){
+											if(global.feedback.form[f].elem[e].options[o].selected === true){
 												
 												var sel = 'selected';
 												
@@ -279,10 +323,10 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 								
 								string	+=	'<option ';
 								string	+=	
-									(!empty(window.feedback.form[f].elem[e].tagOption[o].selected ) ||
+									(!empty(global.feedback.form[f].elem[e].tagOption[o].selected ) ||
 										sel === 'selected'  ? 
 									'selected="selected">' :  '>' );
-								string	+=	 window.feedback.form[f].elem[e].tagOption[o].optInnerHTML + 
+								string	+=	 global.feedback.form[f].elem[e].tagOption[o].optInnerHTML + 
 											'</option>';
 								
 							}
@@ -291,96 +335,96 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 						string	+=	'</select>';
 					}
 					//Block for input tag
-					else if( window.feedback.form[f].elem[e].tagName === 'input') { 
+					else if( global.feedback.form[f].elem[e].tagName === 'input') { 
 						
 						string	+=	'<input ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
-						string	+=	(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
+						string	+=	'id="' + global.feedback.form[f].elem[e].tagName + '-' + f + '-' + global.feedback.form[f].elem[e].id + '" ';
+						string	+=	(global.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
 						//Input css class and style
-						if(!empty(window.feedback.form[f].elem[e].tagClass)){
-							string	+=	'class="' + window.feedback.form[f].elem[e].tagClass + '" ';
+						if(!empty(global.feedback.form[f].elem[e].tagClass)){
+							string	+=	'class="' + global.feedback.form[f].elem[e].tagClass + '" ';
 						}
-						if(!empty(window.feedback.form[f].elem[e].tagStyle)){
-							string	+=	'style="' + window.feedback.form[f].elem[e].tagStyle + '" ';
+						if(!empty(global.feedback.form[f].elem[e].tagStyle)){
+							string	+=	'style="' + global.feedback.form[f].elem[e].tagStyle + '" ';
 						}
-						string	+=	'type="'		+ window.feedback.form[f].elem[e].tagType + '" ';
-						string	+=	(!empty(window.feedback.form[f].elem[e].tagPlaceholder) ? 
-										'placeholder="'	+ window.feedback.form[f].elem[e].tagPlaceholder + '" ' : '');
-						string	+=	(!empty(window.feedback.form[f].elem[e].tagValue) ? 
-										'value="'	+ window.feedback.form[f].elem[e].tagValue + '" ' : '');
-						if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+						string	+=	'type="'		+ global.feedback.form[f].elem[e].tagType + '" ';
+						string	+=	(!empty(global.feedback.form[f].elem[e].tagPlaceholder) ? 
+										'placeholder="'	+ global.feedback.form[f].elem[e].tagPlaceholder + '" ' : '');
+						string	+=	(!empty(global.feedback.form[f].elem[e].tagValue) ? 
+										'value="'	+ global.feedback.form[f].elem[e].tagValue + '" ' : '');
+						if(!empty(global.feedback.form[f].elem[e].tagTitleTooltip)){
 							string	+=	'data-toggle="tooltip" ';
-							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+							string	+=	'title="' + global.feedback.form[f].elem[e].tagTitleTooltip + '" ';
 						}										
 						string	+=	'/>';
 
 					}						
 					//Block for textarea tag
-					else if( window.feedback.form[f].elem[e].tagName == 'textarea') { 
+					else if( global.feedback.form[f].elem[e].tagName == 'textarea') { 
 						
 						string	+=	'<textarea ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
-						string	+=	(window.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
-						string	+=	(!empty(window.feedback.form[f].elem[e].tagPlaceholder) ? 
-										'placeholder="'	+ window.feedback.form[f].elem[e].tagPlaceholder + '" ' : '');
+						string	+=	'id="' + global.feedback.form[f].elem[e].tagName + '-' + f + '-' + global.feedback.form[f].elem[e].id + '" ';
+						string	+=	(global.feedback.form[f].elem[e].tagRequired === 'required' ? 'required ' :  '' );
+						string	+=	(!empty(global.feedback.form[f].elem[e].tagPlaceholder) ? 
+										'placeholder="'	+ global.feedback.form[f].elem[e].tagPlaceholder + '" ' : '');
 						//Textarea css class and style
-						if(!empty(window.feedback.form[f].elem[e].tagClass)){
-							string	+=	'class="' + window.feedback.form[f].elem[e].tagClass + '" ';
+						if(!empty(global.feedback.form[f].elem[e].tagClass)){
+							string	+=	'class="' + global.feedback.form[f].elem[e].tagClass + '" ';
 						}
 						string	+=	'style="resize: both; overflow: hidden; ' + 
-							(!empty(window.feedback.form[f].elem[e].tagStyle) ? 
-									window.feedback.form[f].elem[e].tagStyle + '" ' : '" ');
+							(!empty(global.feedback.form[f].elem[e].tagStyle) ? 
+									global.feedback.form[f].elem[e].tagStyle + '" ' : '" ');
 						
-						string	+=	(!empty(window.feedback.form[f].elem[e].tagValue) ? 
-										'value="'	+ window.feedback.form[f].elem[e].tagValue + '" ' : '');
-						if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+						string	+=	(!empty(global.feedback.form[f].elem[e].tagValue) ? 
+										'value="'	+ global.feedback.form[f].elem[e].tagValue + '" ' : '');
+						if(!empty(global.feedback.form[f].elem[e].tagTitleTooltip)){
 							string	+=	'data-toggle="tooltip" ';
-							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+							string	+=	'title="' + global.feedback.form[f].elem[e].tagTitleTooltip + '" ';
 						}										
 						string	+=	'>'; 
-						string	+=	(window.feedback.form[f].elem[e].tagValue != undefined ? window.feedback.form[f].elem[e].tagValue :  '' );
+						string	+=	(global.feedback.form[f].elem[e].tagValue != undefined ? global.feedback.form[f].elem[e].tagValue :  '' );
 						string	+=	'</textarea>';
 					}
 					//Block for button tag
-					else if( 	window.feedback.form[f].elem[e].tagName == 'button') { 
+					else if( 	global.feedback.form[f].elem[e].tagName == 'button') { 
 						
 						string	+=	'<button ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
+						string	+=	'id="' + global.feedback.form[f].elem[e].tagName + '-' + f + '-' + global.feedback.form[f].elem[e].id + '" ';
 						
 						//Button css class and style
-						if(!empty(window.feedback.form[f].elem[e].tagClass)){
-							string	+=	'class="' + window.feedback.form[f].elem[e].tagClass + '" ';
+						if(!empty(global.feedback.form[f].elem[e].tagClass)){
+							string	+=	'class="' + global.feedback.form[f].elem[e].tagClass + '" ';
 						}
-						if(!empty(window.feedback.form[f].elem[e].tagStyle)){
-							string	+=	'class="' + window.feedback.form[f].elem[e].tagStyle + '" ';
+						if(!empty(global.feedback.form[f].elem[e].tagStyle)){
+							string	+=	'class="' + global.feedback.form[f].elem[e].tagStyle + '" ';
 						}						
-						if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+						if(!empty(global.feedback.form[f].elem[e].tagTitleTooltip)){
 							string	+=	'data-toggle="tooltip" ';
-							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+							string	+=	'title="' + global.feedback.form[f].elem[e].tagTitleTooltip + '" ';
 						}
 						
 						//Button to submit results only						
-						if(window.feedback.form[f].elem[e].tagType === 'submit'){
-							if(!empty(window.feedback.form[f].elem[e].modalNum)){
+						if(global.feedback.form[f].elem[e].tagType === 'submit'){
+							if(!empty(global.feedback.form[f].elem[e].modalNum)){
 								string	+=	'data-dismiss="modal" ';
 							}
 						}
 						//Button to call modal window only
-						else if(window.feedback.form[f].elem[e].tagType === 'modal'){
-							if(!empty(window.feedback.form[f].elem[e].modalNum)){
+						else if(global.feedback.form[f].elem[e].tagType === 'modal'){
+							if(!empty(global.feedback.form[f].elem[e].modalNum)){
 								
 								string	+=	'data-toggle="modal" data-target="#userto-form-' + f + '-modal-' + 
-											window.feedback.form[f].elem[e].modalNum + '" ';
+											global.feedback.form[f].elem[e].modalNum + '" ';
 								string	+=	'data-dismiss="modal" ';
 							}											
 								string	+=	'>';
 						}
 						//Button to submit results and call modal window
-						else if(window.feedback.form[f].elem[e].tagType === 'submit-modal'){
+						else if(global.feedback.form[f].elem[e].tagType === 'submit-modal'){
 							//string	+=	'onClick="alert(\'abc\')" ';						
-							if(!empty(window.feedback.form[f].elem[e].modalNum)){
+							if(!empty(global.feedback.form[f].elem[e].modalNum)){
 								string	+=	'data-toggle="modal" data-target="#userto-form-' + f + '-modal-' + 
-											window.feedback.form[f].elem[e].modalNum + '" ';								
+											global.feedback.form[f].elem[e].modalNum + '" ';								
 
 								string	+=	'data-dismiss="modal" ';			
 							}							
@@ -390,47 +434,47 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 							string	+=	'>';
 						}
 						
-						string	+=	window.feedback.form[f].elem[e].tagInnerHTML;
+						string	+=	global.feedback.form[f].elem[e].tagInnerHTML;
 						string	+=	'</button>';
 					}					
 					//Block for a tag
-					else if( 	window.feedback.form[f].elem[e].tagName == 'a') {					
+					else if( 	global.feedback.form[f].elem[e].tagName == 'a') {					
 						string	+=	'<a ';
-						string	+=	'id="' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id + '" ';
+						string	+=	'id="' + global.feedback.form[f].elem[e].tagName + '-' + f + '-' + global.feedback.form[f].elem[e].id + '" ';
 						string	+=	'href="#" ';
 						//a css class and style
-						if(!empty(window.feedback.form[f].elem[e].tagClass)){
-							string	+=	'class="' + window.feedback.form[f].elem[e].tagClass + '" ';
+						if(!empty(global.feedback.form[f].elem[e].tagClass)){
+							string	+=	'class="' + global.feedback.form[f].elem[e].tagClass + '" ';
 						}
-						if(!empty(window.feedback.form[f].elem[e].tagStyle)){
-							string	+=	'class="' + window.feedback.form[f].elem[e].tagStyle + '" ';
+						if(!empty(global.feedback.form[f].elem[e].tagStyle)){
+							string	+=	'class="' + global.feedback.form[f].elem[e].tagStyle + '" ';
 						}						
-						if(!empty(window.feedback.form[f].elem[e].tagTitleTooltip)){
+						if(!empty(global.feedback.form[f].elem[e].tagTitleTooltip)){
 							string	+=	'data-toggle="tooltip" ';
-							string	+=	'title="' + window.feedback.form[f].elem[e].tagTitleTooltip + '" ';
+							string	+=	'title="' + global.feedback.form[f].elem[e].tagTitleTooltip + '" ';
 						}
 						
 						//a to submit results only						
-						if(window.feedback.form[f].elem[e].tagType === 'submit'){
-							if(!empty(window.feedback.form[f].elem[e].modalNum)){
+						if(global.feedback.form[f].elem[e].tagType === 'submit'){
+							if(!empty(global.feedback.form[f].elem[e].modalNum)){
 								string	+=	'data-dismiss="modal" ';
 							}
 						}
 						//a to call modal window only
-						else if(window.feedback.form[f].elem[e].tagType === 'modal'){
-							if(!empty(window.feedback.form[f].elem[e].modalNum)){								
+						else if(global.feedback.form[f].elem[e].tagType === 'modal'){
+							if(!empty(global.feedback.form[f].elem[e].modalNum)){								
 								string	+=	'data-toggle="modal" data-target="#userto-form-' + f + '-modal-' + 
-											window.feedback.form[f].elem[e].modalNum + '" ';
+											global.feedback.form[f].elem[e].modalNum + '" ';
 								string	+=	'data-dismiss="modal" ';
 							}											
 								string	+=	'>';
 						}
 						//a to submit results and call modal window
-						else if(window.feedback.form[f].elem[e].tagType === 'submit-modal'){
+						else if(global.feedback.form[f].elem[e].tagType === 'submit-modal'){
 							//string	+=	'onClick="alert(\'abc\')" ';						
-							if(!empty(window.feedback.form[f].elem[e].modalNum)){
+							if(!empty(global.feedback.form[f].elem[e].modalNum)){
 								string	+=	'data-toggle="modal" data-target="#userto-form-' + f + '-modal-' + 
-											window.feedback.form[f].elem[e].modalNum + '" ';
+											global.feedback.form[f].elem[e].modalNum + '" ';
 								string	+=	'data-dismiss="modal" ';			
 							}							
 								string	+=	'>';
@@ -439,48 +483,48 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 							string	+=	'>';
 						}
 						
-						string	+=	window.feedback.form[f].elem[e].tagInnerHTML;
+						string	+=	global.feedback.form[f].elem[e].tagInnerHTML;
 						string	+=	'</a>';
 					}					
 					
 					//Add footerInnerHTML div if it exist
-					string	+=	(!empty(window.feedback.form[f].elem[e].footerInnerHTML) ? 
+					string	+=	(!empty(global.feedback.form[f].elem[e].footerInnerHTML) ? 
 						'<footer' +
-							(!empty(window.feedback.form[f].elem[e].footerClass) ?
-							 ' class="' + window.feedback.form[f].elem[e].footerClass + '">' : '>') + 
-							 window.feedback.form[f].elem[e].footerInnerHTML + 
+							(!empty(global.feedback.form[f].elem[e].footerClass) ?
+							 ' class="' + global.feedback.form[f].elem[e].footerClass + '">' : '>') + 
+							 global.feedback.form[f].elem[e].footerInnerHTML + 
 						'</footer>' :  '' ); 
 
 					//Add string with an element html
-					document.querySelector('.userto-form-' + f + '-elem-' + window.feedback.form[f].elem[e].id).innerHTML	= string;		
+					document.querySelector('.userto-form-' + f + '-elem-' + global.feedback.form[f].elem[e].id).innerHTML	= string;		
 					
-						//console.info('document.querySelector(".userto-form-"',f,'"-elem-"',window.feedback.form[f].elem[e].id,')',
-							//document.getElementById (window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id));
+						//console.info('document.querySelector(".userto-form-"',f,'"-elem-"',global.feedback.form[f].elem[e].id,')',
+							//document.getElementById (global.feedback.form[f].elem[e].tagName + '-' + f + '-' + global.feedback.form[f].elem[e].id));
 					
 					//Attach events to buttons and a tags
-					if(	!emptyObj(window.feedback.form[f]) && !empty(window.feedback.form[f].elem[e]) &&
-						(window.feedback.form[f].elem[e].tagName === 'button' || 
-						 window.feedback.form[f].elem[e].tagName === 'a')){
+					if(	!emptyObj(global.feedback.form[f]) && !empty(global.feedback.form[f].elem[e]) &&
+						(global.feedback.form[f].elem[e].tagName === 'button' || 
+						 global.feedback.form[f].elem[e].tagName === 'a')){
 						
 						(function (f, e) {
 							var fVar 	=	f;
-							var mVar	=	(window.feedback.form[f].elem[e].modalNum != undefined ? window.feedback.form[f].elem[e].modalNum : '');
-							var tVar	=	window.feedback.form[f].elem[e].tagType;
+							var mVar	=	(global.feedback.form[f].elem[e].modalNum != undefined ? global.feedback.form[f].elem[e].modalNum : '');
+							var tVar	=	global.feedback.form[f].elem[e].tagType;
 							//letsTest('feedbackForm 01 fVar, mVar, tVar', /* testId */ '', /* expect */ [fVar, mVar, tVar], /* toEqual */ [] );
 							
-							if(		window.feedback.form[f].elem[e].tagType === 'reset'){
+							if(		global.feedback.form[f].elem[e].tagType === 'reset'){
 								//letsTest('feedbackForm 01 reset', /* testId */ '', /* expect */ [fVar, mVar, tVar], /* toEqual */ [] );
-								document.querySelector('#' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id).
-								addEventListener ("click", function(){window.feedback.cleanFeedbackForm(fVar);}, false);
+								document.querySelector('#' + global.feedback.form[f].elem[e].tagName + '-' + f + '-' + global.feedback.form[f].elem[e].id).
+								addEventListener ("click", function(){global.feedback.cleanFeedbackForm(fVar);}, false);
 							}
 							//a to submit results only						
-							else if(window.feedback.form[f].elem[e].tagType === 'submit' 		||
-									window.feedback.form[f].elem[e].tagType === 'submit-modal'	){
+							else if(global.feedback.form[f].elem[e].tagType === 'submit' 		||
+									global.feedback.form[f].elem[e].tagType === 'submit-modal'	){
 								//letsTest('feedbackForm 01 submit-modal', /* testId */ '', /* expect */ [fVar, mVar, tVar], /* toEqual */ [] );		
-								document.querySelector('#' + window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id).
-								addEventListener ("click", function(){window.feedback.feedbackSend(fVar, mVar, tVar);}, false);
-								//console.info('document.getElementById(',window.feedback.form[f].elem[e].tagName,'-',f,'-',window.feedback.form[f].elem[e].id,')',
-								//document.getElementById (window.feedback.form[f].elem[e].tagName + '-' + f + '-' + window.feedback.form[f].elem[e].id));
+								document.querySelector('#' + global.feedback.form[f].elem[e].tagName + '-' + f + '-' + global.feedback.form[f].elem[e].id).
+								addEventListener ("click", function(){global.feedback.feedbackSend(fVar, mVar, tVar);}, false);
+								//console.info('document.getElementById(',global.feedback.form[f].elem[e].tagName,'-',f,'-',global.feedback.form[f].elem[e].id,')',
+								//document.getElementById (global.feedback.form[f].elem[e].tagName + '-' + f + '-' + global.feedback.form[f].elem[e].id));
 							}
 						
 						})(f, e);
@@ -492,12 +536,12 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 		}
 		//End of loop over forms
 	
-		return;
+		return true;
 	}
 	
 		
 //Define	Function to capture data from form-elements	into an array
-	window.feedback.feedbackCaptureArray			= 	function(f){
+	global.feedback.feedbackCaptureArray			= 	function(f){
 		//console.info(' host:',host,' path:', path,' form:',form);
 		
 		var status					=	[];
@@ -505,7 +549,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 			//console.info(' querySelector:',querySelector);
 				
 		var formGroup				=	document.querySelectorAll(querySelector);
-			//letsTest('1-st feedbackCaptureArray', /* testId */ '', /* expect */ [f, formGroup, window.feedback.form[f]], /* toEqual */ [] );
+			//letsTest('1-st feedbackCaptureArray', /* testId */ '', /* expect */ [f, formGroup, global.feedback.form[f]], /* toEqual */ [] );
 		
 		for(var e = 0; e < formGroup.length; e++){
 		
@@ -539,33 +583,33 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 			}
 		
 			//Block for select
-			if( !empty(selectArr) && !empty(selectArr[0]) && window.feedback.form[f].elem[e].tagName === 'select'){
+			if( !empty(selectArr) && !empty(selectArr[0]) && global.feedback.form[f].elem[e].tagName === 'select'){
 
 				if(			selectArr[0].selectedIndex	=== -1	&&
-							window.feedback.form[f].elem[e].tagRequired ===  'required'){
+							global.feedback.form[f].elem[e].tagRequired ===  'required'){
 					var alertString	=
-						'Please, check ' +  window.feedback.form[f].elem[e].labelInnerHTML + 
-						'\n\nОтметьте проверьте пожалуйста ' +  window.feedback.form[f].elem[e].labelInnerHTML ;
+						'Please, check ' +  global.feedback.form[f].elem[e].labelInnerHTML + 
+						'\n\nОтметьте проверьте пожалуйста ' +  global.feedback.form[f].elem[e].labelInnerHTML ;
 					alert(alertString);
 					status[ e]	= 	0;
 				}
 				else if(		selectArr[0].selectedIndex	=== -1	&&
-							window.feedback.form[f].elem[e].tagRequired !=  'required'){
-					window.feedback.form[f].elem[e].label		=	label;
-					window.feedback.form[f].elem[e].tagValue	=	'No data';
-					window.feedback.form[f].elem[e].string		=	window.feedback.form[f].elem[e].label + ' ' + 'No data';
+							global.feedback.form[f].elem[e].tagRequired !=  'required'){
+					global.feedback.form[f].elem[e].label		=	label;
+					global.feedback.form[f].elem[e].tagValue	=	'No data';
+					global.feedback.form[f].elem[e].string		=	global.feedback.form[f].elem[e].label + ' ' + 'No data';
 					status[ e]	= 	1;
 				}
 				else{
 				
-					window.feedback.form[f].elem[e].options		=	[];
+					global.feedback.form[f].elem[e].options		=	[];
 					//letsTest('feedbackCaptureArray 2', /* testId */ '', /* expect */ [selectArr[0].options], /* toEqual */ [] );
 							
 					//See more http://stackoverflow.com/questions/11583728/getting-the-selected-values-in-a-multiselect-tag-in-javascript/11583999#11583999
 					for (var i = 0; i < selectArr[0].length; i++) {
 						if (selectArr[0].options[i].selected === true) {
 							
-							window.feedback.form[f].elem[e].options[i] = {selected: true, value: selectArr[0].options[i].value};
+							global.feedback.form[f].elem[e].options[i] = {selected: true, value: selectArr[0].options[i].value};
 							
 							if(selectedStr == ''){
 								selectedStr	+= selectArr[0].options[i].value;
@@ -580,10 +624,10 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 					//console.info(' selectedStr:',selectedStr);
 					//Old but working for not multiple choice variant: var selectOpt 	=	selectArr[0].options[selectArr[0].selectedIndex].value;
 															
-					window.feedback.form[f].elem[e].label		=	label;
-					window.feedback.form[f].elem[e].tagValue	=	selectedStr;			
-					window.feedback.form[f].elem[e].string		=	window.feedback.form[f].elem[e].label + ' ' + 
-																	window.feedback.form[f].elem[e].tagValue;
+					global.feedback.form[f].elem[e].label		=	label;
+					global.feedback.form[f].elem[e].tagValue	=	selectedStr;			
+					global.feedback.form[f].elem[e].string		=	global.feedback.form[f].elem[e].label + ' ' + 
+																	global.feedback.form[f].elem[e].tagValue;
 				
 					status[ e]	= 	1;
 				}										
@@ -591,7 +635,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 			}
 
 			//Block for input
-			if(	!empty(inputArr) && !empty(inputArr[0]) && window.feedback.form[f].elem[e].tagName === 'input'){
+			if(	!empty(inputArr) && !empty(inputArr[0]) && global.feedback.form[f].elem[e].tagName === 'input'){
 				//console.info(' input:',labelArr[0].innerHTML,' ',inputValue);
 				
 				//console.info(' value.match(/^([\d\s\+\-]{6,})$/gi):',inputArr[0].value.match(/^([\d\s\+\-]{6,})$/gi));
@@ -615,9 +659,9 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 					status[ e]	= 	0;
 				
 				}
-				//Error empty field empty(inputArr[0].value) && window.feedback.form[f].elem[e].tagRequired ===
-				else if(	empty(inputArr[0].value) && !empty(window.feedback.form[f].elem[e]) && 
-							window.feedback.form[f].elem[e].tagRequired === 'tagRequired'){
+				//Error empty field empty(inputArr[0].value) && global.feedback.form[f].elem[e].tagRequired ===
+				else if(	empty(inputArr[0].value) && !empty(global.feedback.form[f].elem[e]) && 
+							global.feedback.form[f].elem[e].tagRequired === 'tagRequired'){
 					var alertString	=
 						'You miss the field'  + '\n' + label +
 						'\n\n\n\n' +
@@ -642,19 +686,19 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 				
 					//Case take email
 					if(inputArr[0].type == 'email'){
-						if( empty(window.feedback.form[f])){
-							window.feedback.form[f] 		=	{};
-							window.feedback.form[f].email	=	[];
-							window.feedback.form[f].email[0]=	{};
+						if( empty(global.feedback.form[f])){
+							global.feedback.form[f] 		=	{};
+							global.feedback.form[f].email	=	[];
+							global.feedback.form[f].email[0]=	{};
 						}
-						window.feedback.form[f].email[0].toEmail		=	inputArr[0].value;
+						global.feedback.form[f].email[0].toEmail		=	inputArr[0].value;
 					}
 				
-					window.feedback.form[f].elem[e].label		=	label;
-					window.feedback.form[f].elem[e].tagValue	=	inputArr[0].value;
-					window.feedback.form[f].elem[e].string 		=	window.feedback.form[f].elem[e].label + ' ' + window.feedback.form[f].elem[e].tagValue;
+					global.feedback.form[f].elem[e].label		=	label;
+					global.feedback.form[f].elem[e].tagValue	=	inputArr[0].value;
+					global.feedback.form[f].elem[e].string 		=	global.feedback.form[f].elem[e].label + ' ' + global.feedback.form[f].elem[e].tagValue;
 					
-					//letsTest('Input feedbackCaptureArray', /* testId */ '', /* expect */ [f, e, inputArr[0].value, window.feedback.form], /* toEqual */ [] );
+					//letsTest('Input feedbackCaptureArray', /* testId */ '', /* expect */ [f, e, inputArr[0].value, global.feedback.form], /* toEqual */ [] );
 				
 					status[e]	= 	1;
 				}
@@ -662,7 +706,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 			}
 			
 			//Block for textarea
-			if(	!empty(textareaArr) && !empty(textareaArr[0]) && window.feedback.form[f].elem[e].tagName === 'textarea'){
+			if(	!empty(textareaArr) && !empty(textareaArr[0]) && global.feedback.form[f].elem[e].tagName === 'textarea'){
 				//console.info(' input:',labelArr[0].innerHTML,' ',textareaValue);
 									
 				//Error empty field
@@ -685,9 +729,9 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 						textareaArr[0].value				=	'нет данных';
 					}
 					
-					window.feedback.form[f].elem[e].label		=	label;
-					window.feedback.form[f].elem[e].tagValue	=	textareaArr[0].value;
-					window.feedback.form[f].elem[e].string 		=	window.feedback.form[f].elem[e].label + ' ' + window.feedback.form[f].elem[e].tagValue;
+					global.feedback.form[f].elem[e].label		=	label;
+					global.feedback.form[f].elem[e].tagValue	=	textareaArr[0].value;
+					global.feedback.form[f].elem[e].string 		=	global.feedback.form[f].elem[e].label + ' ' + global.feedback.form[f].elem[e].tagValue;
 					
 					status[ e]	= 	1;
 				}
@@ -699,11 +743,11 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 		
 		
 		//Calculating statusFinal		
-		var statusFinal =	1;
+		var statusFinal =	true;
 		for(var i = 0; i < status.length; i++){
 			
 			if(status[i] === 0){							
-				statusFinal = 0;
+				statusFinal = false;
 				break;
 			}
 		}
@@ -715,46 +759,46 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 
 
 //Define	Function to process feedback capture array into string  
-	window.feedback.feedbackCapture					=	function(f){
+	global.feedback.feedbackCapture					=	function(f){
 		
-		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ [window.feedback.form[f]], /* toEqual */ [] );
+		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ [global.feedback.form[f]], /* toEqual */ [] );
 		
 		
 		var capture			=	{};
 			capture.str		=	'';
 			capture.tlgrm	=	'';
 			
-		if(	!empty(window.feedback.form) && !empty(window.feedback.form[f]) &&
-			!empty(window.feedback.form[f].email) && !empty(window.feedback.form[f].email[0]) &&
-			!empty(window.feedback.form[f].email[0].userEmail)){
-			capture.str		+=	'Email: ' + window.feedback.form[f].email[0].userEmail + '<br />';
+		if(	!empty(global.feedback.form) && !empty(global.feedback.form[f]) &&
+			!empty(global.feedback.form[f].email) && !empty(global.feedback.form[f].email[0]) &&
+			!empty(global.feedback.form[f].email[0].userEmail)){
+			capture.str		+=	'Email: ' + global.feedback.form[f].email[0].userEmail + '<br />';
 		}
 
-		for(var e = 0; e < window.feedback.form[f].elem.length; ++e){
+		for(var e = 0; e < global.feedback.form[f].elem.length; ++e){
 			
-			if(	!empty(window.feedback.form[f].elem[e]) && 
-				window.feedback.form[f].elem[e].tagName != 'button' &&
-				window.feedback.form[f].elem[e].tagName != 'a'){
+			if(	!empty(global.feedback.form[f].elem[e]) && 
+				global.feedback.form[f].elem[e].tagName != 'button' &&
+				global.feedback.form[f].elem[e].tagName != 'a'){
 				
-				//console.info(window.feedback.form[f].email[0].toEmail.match(/^([\S]{1,})@([\S]{1,}).([^.]{2,})$/gi) );
+				//console.info(global.feedback.form[f].email[0].toEmail.match(/^([\S]{1,})@([\S]{1,}).([^.]{2,})$/gi) );
 								
-				capture.str	+= ' ' + window.feedback.form[f].elem[e].string + '<br />';
+				capture.str	+= ' ' + global.feedback.form[f].elem[e].string + '<br />';
 				
-				capture.tlgrm	+= '<i>' + window.feedback.form[f].elem[e].label + '</i> '  +
-					' ' + window.feedback.form[f].elem[e].tagValue + '\n';				
+				capture.tlgrm	+= '<i>' + global.feedback.form[f].elem[e].label + '</i> '  +
+					' ' + global.feedback.form[f].elem[e].tagValue + '\n';				
 			}
 		}
 		
-		window.feedback.form[f].capture = capture;	
+		global.feedback.form[f].capture = capture;	
 		
-		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ window.feedback.form[f].elem, /* toEqual */ [] );
+		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ global.feedback.form[f].elem, /* toEqual */ [] );
 		
-		return;
+		return true;
 	}
 	
 	
 //Define	Function to send feedback
-	window.feedback.feedbackSend					= 	function(f, m, t){
+	global.feedback.feedbackSend					= 	function(f, m, t){
 		/* input:	f	-	form number-index
 					m	-	modul window number
 					t	-	type of modal window
@@ -762,22 +806,22 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 		*/
 		//event.preventDefault();
 		
-		//letsTest('3-step feedbackSend window.feedback.form', /* testId */ '', /* expect */ [f, m, t,window.feedback], /* toEqual */ [] );
+		//letsTest('3-step feedbackSend global.feedback.form', /* testId */ '', /* expect */ [f, m, t,global.feedback], /* toEqual */ [] );
 		
-		if( typeof window.feedback === 'object' && typeof window.feedback.setFeedbackFormContent === 'function'){
-			window.feedback.setFeedbackFormContent();
+		if( typeof global.feedback === 'object' && typeof global.feedback.setFeedbackFormContent === 'function'){
+			global.feedback.setFeedbackFormContent();
 		}
 		
-		var feedbackCaptureArray	=	window.feedback.feedbackCaptureArray(f);
+		var feedbackCaptureArray	=	global.feedback.feedbackCaptureArray(f);
 		
 		//letsTest('3-step feedbackSend feedbackCaptureArray', /* testId */ '', /* expect */ feedbackCaptureArray, /* toEqual */ [] );
 		
-		if(feedbackCaptureArray	==	0){
+		if(feedbackCaptureArray	==	false){
 			
 			var parentModalWindow	=	document.querySelector('#modalContainer' );
 			var modalWindow 			= 	document.querySelector('#userto-form-' + f + '-modal-' + m );
 
-			//NEW window.feedback.cleanFeedbackForm();
+			//NEW global.feedback.cleanFeedbackForm();
 			
 			//console.info('1-step #userto-form-' + f + '-modal-' + m,' modalWindow:',modalWindow);
 			
@@ -791,36 +835,36 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 				
 				if (!empty(parentModalWindow)) {
 					
-					window.feedback.insertAppendNode(parentModalWindow, modalWindow, 'insert'); //?
-					window.feedback.setFeedbackForm();
+					global.feedback.insertAppendNode(parentModalWindow, modalWindow, 'insert'); //?
+					global.feedback.setFeedbackForm();
 					
-					if(empty(window.feedback.form[f].modalStage)){window.feedback.form[f].modalStage = 0;}
+					if(empty(global.feedback.form[f].modalStage)){global.feedback.form[f].modalStage = 0;}
 					
-					//letsTest('4-step window.feedback.feedbackSend f,m', /* testId */ '', /* expect */ {'name': '#userto-form-' + f + '-modalWindow-' + m, 'parentModalWindow': parentModalWindow}, /* toEqual */ [] );
+					//letsTest('4-step global.feedback.feedbackSend f,m', /* testId */ '', /* expect */ {'name': '#userto-form-' + f + '-modalWindow-' + m, 'parentModalWindow': parentModalWindow}, /* toEqual */ [] );
 					if(	m > 0){
-						var mM1	=	(window.feedback.form[f].modalStage).toString();
-						//letsTest('window.feedback.feedbackSend mM1', /* testId */ '', /* expect */ mM1, /* toEqual */ [] );
+						var mM1	=	(global.feedback.form[f].modalStage).toString();
+						//letsTest('global.feedback.feedbackSend mM1', /* testId */ '', /* expect */ mM1, /* toEqual */ [] );
 						jQuery('#userto-form-' + f + '-modal-' + mM1).modal("toggle");
 					}
 				}
 			},100);
 			
 			//Terminate sending date from the form in the case of input error
-			return;
+			return true;
 		}
 		
 		
-		if(t === 'modal' && feedbackCaptureArray	!=	0){
+		if(t === 'modal' && feedbackCaptureArray	!=	false){
 			
-			window.feedback.form[f].modalStage = m + 1;
+			global.feedback.form[f].modalStage = m + 1;
 			
 		}
 		
 		
-		window.feedback.feedbackCapture(f);
+		global.feedback.feedbackCapture(f);
 		//Stop sending email, if user does not fill all fields
 
-		//console.info(' window.feedback.form[',f,']:',window.feedback.form[f]);
+		//console.info(' global.feedback.form[',f,']:',global.feedback.form[f]);
 		//location.host
 		//location.pathname.replace(/\//gim, '')
 
@@ -829,61 +873,61 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 		 * Part for message sending via Telegram
  		 ****************************************** */
 		
-		if(	empty(window.feedback.form[f].email[0].messageTlgrm)){ 
-			window.feedback.form[f].email[0].messageTlgrm =	'';}
+		if(	empty(global.feedback.form[f].email[0].messageTlgrm)){ 
+			global.feedback.form[f].email[0].messageTlgrm =	'';}
 		
-		//console.info(' window.feedback.form[',f,'].email[0].messageTlgrm Before:',window.feedback.form[f].email[0].messageTlgrm);
-			window.feedback.form[f].email[0].messageTlgrm	+=							
+		//console.info(' global.feedback.form[',f,'].email[0].messageTlgrm Before:',global.feedback.form[f].email[0].messageTlgrm);
+			global.feedback.form[f].email[0].messageTlgrm	+=							
 				
-					window.feedback.form[f].capture.tlgrm	+ '\n' +
+					global.feedback.form[f].capture.tlgrm	+ '\n' +
 	
 					'Page:\n'					+
-					window.feedback.host		+	
-					window.feedback.pathname;					
+					global.feedback.host		+	
+					global.feedback.pathname;					
 									
 				//'<a href="http://r1.userto.com/demoResizeFeedbackField.php" target="_blank">'+'Source site</a>';							
 				
 
-		//console.info(' window.feedback.form[',f,'].email[0]: After',window.feedback.form[f].email[0]);
+		//console.info(' global.feedback.form[',f,'].email[0]: After',global.feedback.form[f].email[0]);  
 
 		
 		/* ******************************************
 		 * Part for email AND Telegram sending
  		 ****************************************** */
 		
-		if(	empty(window.feedback.form[f].email[0].message)){ 
-			window.feedback.form[f].email[0].message =	'';}
+		if(	empty(global.feedback.form[f].email[0].message)){ 
+			global.feedback.form[f].email[0].message =	'';}
 		
-		//console.info(' window.feedback.form[',f,'].email[0].message Before:',window.feedback.form[f].email[0].message);
-			window.feedback.form[f].email[0].message	+=							
+		//console.info(' global.feedback.form[',f,'].email[0].message Before:',global.feedback.form[f].email[0].message);
+			global.feedback.form[f].email[0].message	+=							
 				'<br />' 	+
 				'<br />' 	+
 				'<p>' 		+
-					window.feedback.form[f].capture.str	+
+					global.feedback.form[f].capture.str	+
 				'</p>'		+
 				'<p style="">' 	+
 					'Page: '					+
-					window.feedback.host		+	
-					window.feedback.pathname	+
+					global.feedback.host		+	
+					global.feedback.pathname	+
 				'</p>';					
 									
-		var txt	=		window.feedback.form[f].email[0].topic 		+ '\n' +				
-						window.feedback.form[f].email[0].messageTlgrm;
-		//console.info(' f',f,' window.feedback.form[f].email[0]:',window.feedback.form[f].email[0]);
-		//window.feedback.form[f].email[0].toEmail = 't3531350@yahoo.com';
+		var txt	=		global.feedback.form[f].email[0].topic 		+ '\n' +				
+						global.feedback.form[f].email[0].messageTlgrm;
+		//console.info(' f',f,' global.feedback.form[f].email[0]:',global.feedback.form[f].email[0]);
+		//global.feedback.form[f].email[0].toEmail = 't3531350@yahoo.com';
 
-		//letsTest('feedbackSend 4-step ', /* testId */ '', /* expect */ [f, m, t,window.feedback.form], /* toEqual */ [] );
+		//letsTest('feedbackSend 4-step ', /* testId */ '', /* expect */ [f, m, t,global.feedback.form], /* toEqual */ [] );
 		jQuery.ajax({
 			type: 			'POST',
 			url: 			'http://userto.com/php/phpGetPost.php',
 			data: {
-				optPost:	window.feedback.form[f].email[0].optPost,
-				emailTo:	window.feedback.form[f].email[0].toEmail,
-				emailFrom:	window.feedback.form[f].email[0].fromEmail,
-				emailBCC:	window.feedback.form[f].email[0].BCC,
-				topic:		window.feedback.form[f].email[0].topic,				
-				message:	window.feedback.form[f].email[0].message,
-				chat_id:	window.feedback.form[f].email[0].chatId,
+				optPost:	global.feedback.form[f].email[0].optPost,
+				emailTo:	global.feedback.form[f].email[0].toEmail,
+				emailFrom:	global.feedback.form[f].email[0].fromEmail,
+				emailBCC:	global.feedback.form[f].email[0].BCC,
+				topic:		global.feedback.form[f].email[0].topic,				
+				message:	global.feedback.form[f].email[0].message,
+				chat_id:	global.feedback.form[f].email[0].chatId,
 				txt:		txt,
 				parse_mode: 'HTML'
 			},
@@ -891,19 +935,20 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 			success: function(echo){
 					
 					//Form reset
-					window.feedback.setFeedbackForm();					
-					window.feedback.cleanFeedbackForm(f)
+					global.feedback.setFeedbackForm();					
+					global.feedback.cleanFeedbackForm(f);
+					return true;
 					//alert(echo);
 					//console.info('email echo: ',echo);
 				}
 		});			
 				
-		return;
+		return true;
 	}	
 	
 
-/* Script in order Bootstrap tooltips work https://codepen.io/imoddesign/pen/laoAE */
-	$(function(){
+/* Script in order Bootstrap tooltips work https://codepen.io/imoddesign/pen/laoAE  */
+	jQuery(function(){
 		setTimeout(function(){
 			var options = {
 				placement: function (context, element) {
@@ -921,3 +966,4 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 	});
 
 
+	module.exports	= {empty, emptyObj,toggleTodo, todos};

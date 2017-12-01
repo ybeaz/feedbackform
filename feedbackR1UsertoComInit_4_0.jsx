@@ -1,19 +1,19 @@
 	
 		
 		
-//Define	Function to setup data for feedback url-form-element-option blocks
+//Define	Function to setup data for feedback url-form-element-option blocks   
 	function setFeedbackFormContentF0(f){
 			
-			window.feedback.form[f]								=	{};
-			window.feedback.form[f].email						=	[];
-			window.feedback.form[f].email[0]					=	{};
-			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
-			window.feedback.form[f].email[0].chatId				=	'463530275';
-			window.feedback.form[f].email[0].toEmail			=	'';
-			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
-			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
-			window.feedback.form[f].email[0].topic				=	'Thank you for the message';
-			window.feedback.form[f].email[0].message			=	''	+														
+			global.feedback.form[f]								=	{};
+			global.feedback.form[f].email						=	[];
+			global.feedback.form[f].email[0]					=	{};
+			global.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+			global.feedback.form[f].email[0].chatId				=	'463530275';
+			global.feedback.form[f].email[0].toEmail			=	'';
+			global.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
+			global.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
+			global.feedback.form[f].email[0].topic				=	'Thank you for the message';
+			global.feedback.form[f].email[0].message			=	''	+														
 			'Hi,' 				+	'<br />' + '<br />'	+
 				'Thank you for your message.'			+ '<br />' +
 				'I will answer you as soon as possible.' + '<br />' + '<br />' +
@@ -41,7 +41,7 @@
 								];						
 			
 			//Data for 			
-			window.feedback.form[f].elem	= [
+			global.feedback.form[f].elem	= [
 				{	id					:	0,
 					nameInternal		:	'Data for Name, form element, input',
 					labelInnerHTML		:	'Name',
@@ -111,16 +111,16 @@
 //Define	Function to setup data for feedback url-form-element-option blocks
 	function setFeedbackFormContentF1(f){
 			
-			window.feedback.form[f]								=	{};
-			window.feedback.form[f].email						=	[];
-			window.feedback.form[f].email[0]					=	{};
-			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
-			window.feedback.form[f].email[0].chatId				=	'463530275';
-			window.feedback.form[f].email[0].toEmail			=	'';
-			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
-			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
-			window.feedback.form[f].email[0].topic				=	'Thank you for the message';
-			window.feedback.form[f].email[0].message			=	''	+														
+			global.feedback.form[f]								=	{};
+			global.feedback.form[f].email						=	[];
+			global.feedback.form[f].email[0]					=	{};
+			global.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+			global.feedback.form[f].email[0].chatId				=	'463530275';
+			global.feedback.form[f].email[0].toEmail			=	'';
+			global.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
+			global.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
+			global.feedback.form[f].email[0].topic				=	'Thank you for the message';
+			global.feedback.form[f].email[0].message			=	''	+														
 			'Hi,' 				+	'<br />' + '<br />'	+
 				'Thank you for your message.'			+ '<br />' +
 				'I will answer you as soon as possible.' + '<br />' + '<br />' +
@@ -148,7 +148,7 @@
 								];						
 			
 			//Data for 			
-			window.feedback.form[f].elem	= [
+			global.feedback.form[f].elem	= [
 				{	id					:	0,
 					nameInternal		:	'Data for Name, form element, input',
 					labelInnerHTML		:	'Name',
@@ -227,16 +227,16 @@
 //Define	Function to setup data for feedback url-form-element-option blocks
 	function setFeedbackFormContentF2(f){
 			
-			window.feedback.form[f]								=	{};
-			window.feedback.form[f].email						=	[];
-			window.feedback.form[f].email[0]					=	{};
-			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
-			window.feedback.form[f].email[0].chatId				=	'463530275';
-			window.feedback.form[f].email[0].toEmail			=	'';
-			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
-			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
-			window.feedback.form[f].email[0].topic				=	'Thank you for the message';
-			window.feedback.form[f].email[0].message			=	''	+														
+			global.feedback.form[f]								=	{};
+			global.feedback.form[f].email						=	[];
+			global.feedback.form[f].email[0]					=	{};
+			global.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+			global.feedback.form[f].email[0].chatId				=	'463530275';
+			global.feedback.form[f].email[0].toEmail			=	'';
+			global.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
+			global.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
+			global.feedback.form[f].email[0].topic				=	'Thank you for the message';
+			global.feedback.form[f].email[0].message			=	''	+														
 			'Hi,' 				+	'<br />' + '<br />'	+
 				'Thank you for your message.'			+ '<br />' +
 				'We will contact with you as soon as possible.' + '<br />' + '<br />' +
@@ -255,27 +255,27 @@
 
 
 			//Data for 'Name:', [0] form element, input
-			window.feedback.form[f].elem						=	[];							
-			window.feedback.form[f].elem[0]						=	{};
-			window.feedback.form[f].elem[0].id					=	0;
-			window.feedback.form[f].elem[0].labelInnerHTML		=	'Name';
-			window.feedback.form[f].elem[0].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[0].tagName				=	'input';
-			window.feedback.form[f].elem[0].tagType				=	'text'; //'number';
-			window.feedback.form[f].elem[0].tagPlaceholder		=	'John Smith';						
-			window.feedback.form[f].elem[0].tagClass			=	'form-control';
-			window.feedback.form[f].elem[0].tagTitleTooltip		=	'How can we apply to you?';				
+			global.feedback.form[f].elem						=	[];							
+			global.feedback.form[f].elem[0]						=	{};
+			global.feedback.form[f].elem[0].id					=	0;
+			global.feedback.form[f].elem[0].labelInnerHTML		=	'Name';
+			global.feedback.form[f].elem[0].labelClass			=	'control-label';			
+			global.feedback.form[f].elem[0].tagName				=	'input';
+			global.feedback.form[f].elem[0].tagType				=	'text'; //'number';
+			global.feedback.form[f].elem[0].tagPlaceholder		=	'John Smith';						
+			global.feedback.form[f].elem[0].tagClass			=	'form-control';
+			global.feedback.form[f].elem[0].tagTitleTooltip		=	'How can we apply to you?';				
 			
 			//[0][1] Data for кнопка 'Type of the user:',  form element, select, type: multiple
-			window.feedback.form[f].elem[1]						=	{};
-			window.feedback.form[f].elem[1].id					=	1;			
-			window.feedback.form[f].elem[1].labelInnerHTML		=	'Telecom type';
-			window.feedback.form[f].elem[1].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[1].tagName				=	'select';
-			window.feedback.form[f].elem[1].tagType				=	'';			
-			window.feedback.form[f].elem[1].tagClass			=	'form-control';
-			window.feedback.form[f].elem[1].tagRequired			=	'required';			
-			window.feedback.form[f].elem[1].tagOption			=	[
+			global.feedback.form[f].elem[1]						=	{};
+			global.feedback.form[f].elem[1].id					=	1;			
+			global.feedback.form[f].elem[1].labelInnerHTML		=	'Telecom type';
+			global.feedback.form[f].elem[1].labelClass			=	'control-label';			
+			global.feedback.form[f].elem[1].tagName				=	'select';
+			global.feedback.form[f].elem[1].tagType				=	'';			
+			global.feedback.form[f].elem[1].tagClass			=	'form-control';
+			global.feedback.form[f].elem[1].tagRequired			=	'required';			
+			global.feedback.form[f].elem[1].tagOption			=	[
 					{'optInnerHTML': 'You like'},
 					{'optInnerHTML': 'Skype'},
 					{'optInnerHTML': 'WhatsApp'},
@@ -287,42 +287,42 @@
 				];
 
 			//Data for 'Skype, WhatsApp, Telegram, WeChat, Viber, Email or Phone', [1] form element, input									
-			window.feedback.form[f].elem[2]						=	{};
-			window.feedback.form[f].elem[2].id					=	2;
-			window.feedback.form[f].elem[2].labelInnerHTML		=	'Number (login)';
-			window.feedback.form[f].elem[2].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[2].tagName				=	'input';
-			window.feedback.form[f].elem[2].tagRequired			=	'required';
-			window.feedback.form[f].elem[2].tagType				=	'text'; //'number';			
-			window.feedback.form[f].elem[2].tagClass			=	'form-control';
-			window.feedback.form[f].elem[2].tagPlaceholder		=	'your contacts';
+			global.feedback.form[f].elem[2]						=	{};
+			global.feedback.form[f].elem[2].id					=	2;
+			global.feedback.form[f].elem[2].labelInnerHTML		=	'Number (login)';
+			global.feedback.form[f].elem[2].labelClass			=	'control-label';			
+			global.feedback.form[f].elem[2].tagName				=	'input';
+			global.feedback.form[f].elem[2].tagRequired			=	'required';
+			global.feedback.form[f].elem[2].tagType				=	'text'; //'number';			
+			global.feedback.form[f].elem[2].tagClass			=	'form-control';
+			global.feedback.form[f].elem[2].tagPlaceholder		=	'your contacts';
 
 			//Data for 'Сведения и факты, не указанные ранее:', [2] form element, textarea									
-			window.feedback.form[f].elem[3]						=	{};
-			window.feedback.form[f].elem[3].id					=	3;
-			window.feedback.form[f].elem[3].labelInnerHTML		=	'Question - commentary';
-			window.feedback.form[f].elem[3].labelClass			=	'control-label';			
-			window.feedback.form[f].elem[3].tagName				=	'textarea';
-			window.feedback.form[f].elem[3].tagClass			=	'textAreaInput h-10-em';
-			window.feedback.form[f].elem[3].tagRequired			=	'required';
-			window.feedback.form[f].elem[3].tagPlaceholder		=	'your message';
+			global.feedback.form[f].elem[3]						=	{};
+			global.feedback.form[f].elem[3].id					=	3;
+			global.feedback.form[f].elem[3].labelInnerHTML		=	'Question - commentary';
+			global.feedback.form[f].elem[3].labelClass			=	'control-label';			
+			global.feedback.form[f].elem[3].tagName				=	'textarea';
+			global.feedback.form[f].elem[3].tagClass			=	'textAreaInput h-10-em';
+			global.feedback.form[f].elem[3].tagRequired			=	'required';
+			global.feedback.form[f].elem[3].tagPlaceholder		=	'your message';
 			
 			//Data for кнопка 'Отправить', [3] form element, button, type: submit-modal
-			window.feedback.form[f].elem[4]						=	{};
-			window.feedback.form[f].elem[4].id					=	4;
-			window.feedback.form[f].elem[4].tagName				=	'button';
-			window.feedback.form[f].elem[4].tagType				=	'submit-modal';
-			window.feedback.form[f].elem[4].tagInnerHTML		=	'Send';
-			window.feedback.form[f].elem[4].tagClass			=	'btn btn-success w-8-em';
-			window.feedback.form[f].elem[4].modalNum			=	'0';
+			global.feedback.form[f].elem[4]						=	{};
+			global.feedback.form[f].elem[4].id					=	4;
+			global.feedback.form[f].elem[4].tagName				=	'button';
+			global.feedback.form[f].elem[4].tagType				=	'submit-modal';
+			global.feedback.form[f].elem[4].tagInnerHTML		=	'Send';
+			global.feedback.form[f].elem[4].tagClass			=	'btn btn-success w-8-em';
+			global.feedback.form[f].elem[4].modalNum			=	'0';
 
 			//Data for кнопка 'Очистить', [4] form element, button, type: reset
-			window.feedback.form[f].elem[5]						=	{};
-			window.feedback.form[f].elem[5].id					=	5;
-			window.feedback.form[f].elem[5].tagName				=	'button';
-			window.feedback.form[f].elem[5].tagType				=	'reset';
-			window.feedback.form[f].elem[5].tagInnerHTML		=	'Reset';
-			window.feedback.form[f].elem[5].tagClass			=	'btn btn-light';
+			global.feedback.form[f].elem[5]						=	{};
+			global.feedback.form[f].elem[5].id					=	5;
+			global.feedback.form[f].elem[5].tagName				=	'button';
+			global.feedback.form[f].elem[5].tagType				=	'reset';
+			global.feedback.form[f].elem[5].tagInnerHTML		=	'Reset';
+			global.feedback.form[f].elem[5].tagClass			=	'btn btn-light';
 		return;
 	}
 	
@@ -331,16 +331,16 @@
 	function setFeedbackFormContentF3(f){
 
 			
-			window.feedback.form[f]								=	{};
-			window.feedback.form[f].email						=	[];
-			window.feedback.form[f].email[0]					=	{};
-			window.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
-			window.feedback.form[f].email[0].chatId				=	'463530275';
-			window.feedback.form[f].email[0].toEmail			=	'';
-			window.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
-			window.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
-			window.feedback.form[f].email[0].topic				=	'Thank you for the message';
-			window.feedback.form[f].email[0].message			=	''	+														
+			global.feedback.form[f]								=	{};
+			global.feedback.form[f].email						=	[];
+			global.feedback.form[f].email[0]					=	{};
+			global.feedback.form[f].email[0].optPost			=	'emailTelegramFeedback';
+			global.feedback.form[f].email[0].chatId				=	'463530275';
+			global.feedback.form[f].email[0].toEmail			=	'';
+			global.feedback.form[f].email[0].fromEmail			=	'From: Roman Cheskidov <r1@userto.com>\r\n';
+			global.feedback.form[f].email[0].BCC				=	't3531350@yahoo.com';
+			global.feedback.form[f].email[0].topic				=	'Thank you for the message';
+			global.feedback.form[f].email[0].message			=	''	+														
 			'Hi,' 				+	'<br />' + '<br />'	+
 				'Thank you for your message.'			+ '<br />' +
 				'We will contact with you as soon as possible.' + '<br />' + '<br />' +
@@ -373,7 +373,7 @@
 									
 									
 			//Data for 			
-			window.feedback.form[f].elem	= [
+			global.feedback.form[f].elem	= [
 				{	id					:	0,
 					nameInternal		:	'Supersystem-select',
 					labelInnerHTML		:	'type',
@@ -630,19 +630,19 @@
 
 		/*	
 			//Data for кнопка 'Отправить', [3] form element, button, type: submit-modal
-			window.feedback.form[f].elem[4]						=	{};			
-			window.feedback.form[f].elem[4].tagName				=	'button';
-			window.feedback.form[f].elem[4].tagType				=	'submit-modal';
-			window.feedback.form[f].elem[4].tagInnerHTML		=	'Send';
-			window.feedback.form[f].elem[4].tagClass			=	'btn btn-success w-8-em';
-			window.feedback.form[f].elem[4].modalNum			=	'0';
+			global.feedback.form[f].elem[4]						=	{};			
+			global.feedback.form[f].elem[4].tagName				=	'button';
+			global.feedback.form[f].elem[4].tagType				=	'submit-modal';
+			global.feedback.form[f].elem[4].tagInnerHTML		=	'Send';
+			global.feedback.form[f].elem[4].tagClass			=	'btn btn-success w-8-em';
+			global.feedback.form[f].elem[4].modalNum			=	'0';
 
 			//Data for кнопка 'Очистить', [4] form element, button, type: reset
-			window.feedback.form[f].elem[5]						=	{};			
-			window.feedback.form[f].elem[5].tagName				=	'button';
-			window.feedback.form[f].elem[5].tagType				=	'reset';
-			window.feedback.form[f].elem[5].tagInnerHTML		=	'Reset';
-			window.feedback.form[f].elem[5].tagClass			=	'btn btn-light';
+			global.feedback.form[f].elem[5]						=	{};			
+			global.feedback.form[f].elem[5].tagName				=	'button';
+			global.feedback.form[f].elem[5].tagType				=	'reset';
+			global.feedback.form[f].elem[5].tagInnerHTML		=	'Reset';
+			global.feedback.form[f].elem[5].tagClass			=	'btn btn-light';
 		*/
 		return;
 	}
@@ -817,7 +817,7 @@
 				node.role		=	'';
 				node.innerHTML	=	nodeInnerHTML;
 				
-				window.feedback.insertAppendNode(parentNode, node, 'append');	
+				global.feedback.insertAppendNode(parentNode, node, 'append');	
 		
 		return;
 
@@ -891,7 +891,7 @@
 				node.role		=	'';
 				node.innerHTML	=	nodeInnerHTML;
 				
-				window.feedback.insertAppendNode(parentNode, node, 'append');	
+				global.feedback.insertAppendNode(parentNode, node, 'append');	
 		
 		return;
 
@@ -933,7 +933,7 @@
 				node.role		=	'';
 				node.innerHTML	=	nodeInnerHTML;
 				
-				window.feedback.insertAppendNode(parentNode, node, 'append');		
+				global.feedback.insertAppendNode(parentNode, node, 'append');		
 		
 		return;
 
@@ -975,7 +975,7 @@
 				node.role		=	'';
 				node.innerHTML	=	nodeInnerHTML;
 				
-				window.feedback.insertAppendNode(parentNode, node, 'append');			
+				global.feedback.insertAppendNode(parentNode, node, 'append');			
 		
 		return;
 
@@ -1014,8 +1014,12 @@
 		
 		setForm3Modal0(3,0);
 		
-		window.feedback.setFeedbackForm();
+		global.feedback.setFeedbackForm();
 		
 		
 	}, 250);
 })();
+
+	module.exports	= {setFeedbackFormContentF0};
+
+
