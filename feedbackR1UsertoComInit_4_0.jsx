@@ -1016,7 +1016,6 @@
 		
 		global.feedback.setFeedbackForm();
 		
-		
 	}, 250);
 })();
 

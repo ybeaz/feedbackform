@@ -4,10 +4,10 @@
 	
 	
 	Action
-		CAPTURE_ADDED
+		CREATED_FORM
+		ADDED_CAPTURE
 		CLEANED_FORM
-		? FILLED_FORM_ELEMENT
-		? SENT_FORM_MESSAGE
+		SENT_MESSAGE
 */
 
 global.jQuery = require('jquery');
@@ -63,17 +63,31 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 	}
 
 	
-
-	const counter = (store = 0, action) => {
+	const counterTemp = (storeTemp = 0, action) => {
 		switch(action.type){
-			case 'INCREMENT' :	return store +1;
-			case 'DECREMENT' :	return store -1;
+			case 'INCREMENT' :	return storeTemp +1;
+			case 'DECREMENT' :	return storeTemp -1;
 			default:			return 0;
 		}
 	}
 
 	
-	const toggleTodo = (todo) => {
+	const storeTemp = createStore(counterTemp);
+
+	
+	const renderTemp = () => {
+		if( document.querySelector('#textarea-0-3')){
+			document.querySelector('#textarea-0-3').value = storeTemp.getState();
+		}
+	}
+
+	
+	storeTemp.subscribe(renderTemp);
+	renderTemp();
+	
+	document.body.addEventListener('click', () => {storeTemp.dispatch({type: 'INCREMENT'})});
+	
+	const toggleTodoTemp = (todo) => {
 		/*
 		return {
 			id:			todo.id,
@@ -84,7 +98,7 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 		return Object.assign({},todo, {completed: !todo.completed});		
 	}
 	
-	const todos = (state = [], action) => {
+	const todosTemp = (state = [], action) => {
 		
 		switch(action.type){
 			case 'ADDED_TODO': 
@@ -96,36 +110,96 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 	
 	
 	
-	const store = createStore(counter);
-	
-	const render = () => {
-		if( document.querySelector('#textarea-0-3')){
-			document.querySelector('#textarea-0-3').value = store.getState();
-		}
-	}
-	
-	store.subscribe(render);
-	render();
-	
-	document.body.addEventListener('click', () => {store.dispatch({type: 'INCREMENT'})});
-	
-	
-	//letsTest('Define global object feedback', /* testId */ '', /* expect */ [global.feedback.form, store.getState()], /* toEqual */ [] );
 
 	
 	
+	
+//Define reducers
+	global.feedback								=	{};
+	let action;
+	global.feedback.reducer						=	{};
+	
+/* ************ Define reducers ************ */
+
+	//Reducer to add key-val to an object:	ADDED_OBJ_KEYVAL
+	global.feedback.reducer.added_obj_keyVal = (state={}, action) => {
 		
-//Define global object feedback
+		if(action.elemName != undefined){
+			const elemName	=	action.elemName.toString();		
+			switch(action.type){
+				case 'ADDED_OBJ_KEYVAL': 
+					return Object.assign({},state,{[elemName]: action.elemValDefault})  
+				default: return state;
+			}
+		}
+		return state;
+	}
+	
+	//Reducer to track form creation:	CREATED_FORM
+	global.feedback.reducer.created_form = (state=[], action) => {
+		
+		//letsTest('reducer.created_form', /* testId */ '', /* expect */ [action.id, action.objct], /* toEqual */ [] );
+		
+		switch(action.type){
+			case 'CREATED_FORM': 	return [...state, action.objct];
+			default: return state;
+		}
+	}
+	
+	//Reducer to track user form manipulation:	ADDED_CAPTURE RESET_FORM SENT_MESSAGE ************ */
+	global.feedback.reducer.manipuleted_form = (state=[], action) => {
+		switch(action.type){
+			case 'ADDED_CAPTURE':	return [...state, {id: action.id, type: action.type, form: action.form, formArr: action.formArr, content: action.content}];
+			case 'RESET_FORM': 		return [...state, {id: action.id, type: action.type, form: action.form, formArr: action.formArr, content: action.content}];
+			case 'SENT_MESSAGE': 	return [...state, {id: action.id, type: action.type, form: action.form, formArr: action.formArr, content: action.content}];
+			default: return state;
+		}
+	}
+		
+/*	global.feedback.reducer */
+	const reducersApp	=	combineReducers(
+		global.feedback.reducer	
+	);
+	global.feedback.store		=	createStore(reducersApp);
+	
+	
+		
+/* ************ Define global object feedback			************ */
 	(function(){
 		
-		//Add grlobal object feedback
-		global.feedback							=	{};
-		global.feedback.host					=	location.host;
+		//Add grlobal object feedback 
+		
+		action 	= {
+			id:				0,
+			type:			'ADDED_OBJ_KEYVAL',
+			elemName: 		'host',
+			elemValDefault:	location.host
+		}
+		global.feedback.store.dispatch(action);
+		//Wrong: global.feedback.state = global.feedback.reducer.added_obj_keyVal(global.feedback.state, action);
+		
+		action 	= {
+			id:				1,
+			type:			'ADDED_OBJ_KEYVAL',
+			elemName: 		'location',
+			elemValDefault:	location.pathname
+		}
+		global.feedback.store.dispatch(action);
+		//Wrong: global.feedback.state = global.feedback.reducer.added_obj_keyVal(global.feedback.state, action);
+		
+		
+		
+		//global.feedback.host					=	location.host;
 		global.feedback.pathname				=	location.pathname;
 		global.feedback.form					=	[];
 	
-	})();	
+		letsTest('Define global object feedback', /* testId */ '', /* expect */ global.feedback, /* toEqual */ [] );
+
 	
+	})();	
+
+
+/* ************ Define various functions ************ */	
 	
 //Define	Function to insert node if possible, if not - append
 	global.feedback.insertAppendNode				=	function(parentNode, node, mode){
@@ -216,6 +290,8 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 					}
 				}
 			}
+			
+			global.feedback.store.dispatch({id: 0, type: 'RESET_FORM', form: f, content: 'Reset form'});
 			
 		return true;
 	}
@@ -532,14 +608,17 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 				
 			}
 			//End of loop over elements
-							
+			
+			//letsTest('global.feedback.setFeedbackForm', /* testId */ '', /* expect */ [f, global.feedback.form[f]], /* toEqual */ [] );
+			
+			global.feedback.store.dispatch({ type: 'CREATED_FORM', id: f, objct:	global.feedback.form[f] });  
 		}
 		//End of loop over forms
-	
+
 		return true;
 	}
+
 	
-		
 //Define	Function to capture data from form-elements	into an array
 	global.feedback.feedbackCaptureArray			= 	function(f){
 		//console.info(' host:',host,' path:', path,' form:',form);
@@ -791,7 +870,11 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 		
 		global.feedback.form[f].capture = capture;	
 		
-		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ global.feedback.form[f].elem, /* toEqual */ [] );
+		
+		
+		global.feedback.store.dispatch({id: 0, type: 'ADDED_CAPTURE', form: f, formArr: global.feedback.form[f], content: capture.tlgrm});
+		
+		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ global.feedback.store.getState(), /* toEqual */ [] );
 		
 		return true;
 	}
@@ -934,9 +1017,13 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 			dataType: 'text',
 			success: function(echo){
 					
+					global.feedback.store.dispatch({id: 0, type: 'SENT_MESSAGE', form: f, formArr: global.feedback.form[f], content: global.feedback.form[f].email[0]});
+					letsTest('feedbackSend', /* testId */ '', /* expect */ global.feedback.store.getState(), /* toEqual */ [] );
+
 					//Form reset
 					global.feedback.setFeedbackForm();					
 					global.feedback.cleanFeedbackForm(f);
+					
 					return true;
 					//alert(echo);
 					//console.info('email echo: ',echo);
@@ -966,4 +1053,9 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 	});
 
 
-	module.exports	= {empty, emptyObj,toggleTodo, todos};
+	setTimeout(function(){
+		letsTest('global.feedback.store', /* testId */ '', /* expect */ global.feedback.store.getState(), /* toEqual */ [] );
+	},500);
+	
+	
+	module.exports	= {empty, emptyObj, toggleTodoTemp, todosTemp};
