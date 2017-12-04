@@ -1,5 +1,5 @@
 	
-		
+const feedbackTelegram 		= require('C:/Data/Dev/FeedbackTelegram/feedbackTelegram_4_0.jsx');		
 		
 //Define	Function to setup data for feedback url-form-element-option blocks   
 	function setFeedbackFormContentF0(f){
@@ -1014,7 +1014,17 @@
 		
 		setForm3Modal0(3,0);
 		
+
+			
+		for(let f = 0; f < 10; f++){
+			if(!feedbackTelegram.empty(global.feedback.form[f])){
+				global.feedback.store.dispatch({ type: 'CREATED_ARRAY', id: f, objct:	global.feedback.form[f] });
+			}
+		}
 		global.feedback.setFeedbackForm();
+
+		//global.feedback.store.dispatch({ type: 'CREATED_ARRAY', id: 0, objct:	global.feedback.form[0] });
+		
 		
 	}, 250);
 })();

@@ -42,7 +42,7 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 	}
 
 	
-//Checkign if object empty
+//Checkign if object empty 
 	function emptyObj (obj){
 
 		if( typeof	obj === 'undefined'	||
@@ -85,7 +85,9 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 	storeTemp.subscribe(renderTemp);
 	renderTemp();
 	
-	document.body.addEventListener('click', () => {storeTemp.dispatch({type: 'INCREMENT'})});
+	setTimeout(function(){	
+		document.querySelector('body').addEventListener('click', () => {storeTemp.dispatch({type: 'INCREMENT'})});
+	},500);
 	
 	const toggleTodoTemp = (todo) => {
 		/*
@@ -135,19 +137,29 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 		return state;
 	}
 	
-	//Reducer to track form creation:	CREATED_FORM
-	global.feedback.reducer.created_form = (state=[], action) => {
+	
+	//Reducer to track form form creation, changing, deleting etc.
+	global.feedback.reducer.manipulated_form = (state={}, action) => {
 		
-		//letsTest('reducer.created_form', /* testId */ '', /* expect */ [action.id, action.objct], /* toEqual */ [] );
-		
+		//letsTest('reducer.manipulated_form', /* testId */ '', /* expect */ [action.id, action.objct], /* toEqual */ [] );
+		if(	action.type === 'CREATED_ARRAY' && !state.created_array){
+			 state.created_array = [];
+		}
+		if(	action.type === 'DEPLOYED_FORM' && !state.deployed_form){
+			 state.deployed_form = [];
+		}
 		switch(action.type){
-			case 'CREATED_FORM': 	return [...state, action.objct];
+			case 'CREATED_ARRAY': 	return Object.assign({},state,
+											{created_array: [...state.created_array, action.objct]});
+			case 'DEPLOYED_FORM': 	return Object.assign({},state,
+											{deployed_form: [...state.deployed_form, action.objct]});
 			default: return state;
 		}
 	}
 	
-	//Reducer to track user form manipulation:	ADDED_CAPTURE RESET_FORM SENT_MESSAGE ************ */
-	global.feedback.reducer.manipuleted_form = (state=[], action) => {
+	
+	//Reducer to track form form applying, using, etc.
+	global.feedback.reducer.applied_form = (state=[], action) => {
 		switch(action.type){
 			case 'ADDED_CAPTURE':	return [...state, {id: action.id, type: action.type, form: action.form, formArr: action.formArr, content: action.content}];
 			case 'RESET_FORM': 		return [...state, {id: action.id, type: action.type, form: action.form, formArr: action.formArr, content: action.content}];
@@ -298,7 +310,7 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 
 	
 //Define	Function to fill feedback block with html content
-	global.feedback.setFeedbackForm					=	function(){	
+	global.feedback.setFeedbackForm					=	() => {	
 				
 		//Unused. Call the function to set ini content for feedback forms
 			if(	!empty(global.feedback.setFeedbackFormContent)	&&
@@ -611,7 +623,8 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 			
 			//letsTest('global.feedback.setFeedbackForm', /* testId */ '', /* expect */ [f, global.feedback.form[f]], /* toEqual */ [] );
 			
-			global.feedback.store.dispatch({ type: 'CREATED_FORM', id: f, objct:	global.feedback.form[f] });  
+			//Run reducer for 'DEPLOYED_FORM'
+			global.feedback.store.dispatch({ type: 'DEPLOYED_FORM', id: f, objct:	global.feedback.form[f] });  
 		}
 		//End of loop over forms
 
