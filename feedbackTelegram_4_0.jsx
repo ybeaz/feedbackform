@@ -63,6 +63,8 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 	}
 
 	
+//Redux very basic example and JS pure equivalent 
+(() => {
 	const counterTemp = (storeTemp = 0, action) => {
 		switch(action.type){
 			case 'INCREMENT' :	return storeTemp +1;
@@ -70,24 +72,32 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 			default:			return 0;
 		}
 	}
-
-	
 	const storeTemp = createStore(counterTemp);
 
-	
 	const renderTemp = () => {
 		if( document.querySelector('#textarea-0-3')){
 			document.querySelector('#textarea-0-3').value = storeTemp.getState();
 		}
-	}
-
-	
+	}	
 	storeTemp.subscribe(renderTemp);
 	renderTemp();
 	
-	setTimeout(function(){	
-		document.querySelector('body').addEventListener('click', () => {storeTemp.dispatch({type: 'INCREMENT'})});
-	},500);
+	//document.querySelector('body').addEventListener('click', () => {storeTemp.dispatch({type: 'INCREMENT'})});
+
+//Pure JS basic example of Redux equivalent	  
+	const onClickFunc = () => {
+		
+		if(empty(global.counter)){
+			global.counter = 0;
+		}
+		global.counter++;
+		document.querySelector('#textarea-0-3').value = global.counter;
+		return;
+	}
+	//document.querySelector('.navbar').addEventListener('click', () => {onClickFunc()});	
+
+	
+//Another basic Redux example
 	
 	const toggleTodoTemp = (todo) => {
 		/*
@@ -109,6 +119,12 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 		}
 		//Object.assign({},state,{id: 0, text: action.text, completed: action.completed})
 	}
+	
+	
+	
+	
+	
+})();
 	
 	
 	
@@ -205,7 +221,7 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 		global.feedback.pathname				=	location.pathname;
 		global.feedback.form					=	[];
 	
-		letsTest('Define global object feedback', /* testId */ '', /* expect */ global.feedback, /* toEqual */ [] );
+		//letsTest('Define global object feedback', /* testId */ '', /* expect */ global.feedback, /* toEqual */ [] );
 
 	
 	})();	
@@ -1031,7 +1047,7 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 			success: function(echo){
 					
 					global.feedback.store.dispatch({id: 0, type: 'SENT_MESSAGE', form: f, formArr: global.feedback.form[f], content: global.feedback.form[f].email[0]});
-					letsTest('feedbackSend', /* testId */ '', /* expect */ global.feedback.store.getState(), /* toEqual */ [] );
+					//letsTest('feedbackSend', /* testId */ '', /* expect */ global.feedback.store.getState(), /* toEqual */ [] );
 
 					//Form reset
 					global.feedback.setFeedbackForm();					
@@ -1067,8 +1083,8 @@ const letsTest = require('C:/Data/Dev/LetsTest/letsTest.jsx');		//import letsTes
 
 
 	setTimeout(function(){
-		letsTest('global.feedback.store', /* testId */ '', /* expect */ global.feedback.store.getState(), /* toEqual */ [] );
+		//letsTest('global.feedback.store', /* testId */ '', /* expect */ global.feedback.store.getState(), /* toEqual */ [] );
 	},500);
 	
 	
-	module.exports	= {empty, emptyObj, toggleTodoTemp, todosTemp};
+	module.exports	= {empty, emptyObj};
