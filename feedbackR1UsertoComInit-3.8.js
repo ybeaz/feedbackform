@@ -651,6 +651,7 @@
 											<i class="fa fa-phone-square fa-2x sr-contact" data-toggle="tooltip" title="Viber"></i>&nbsp;\
 											<i class="fa fa-telegram fa-2x sr-contact" data-toggle="tooltip" title="Telegram"></i>&nbsp;\
 											&nbsp;&nbsp;&nbsp;<span class="verticalAlignChild">\
+											+1 917 815 3952<br />\
 											+1 650 7410014<br />\
 											</span></p>\
 										<p class="m-t-0-em m-b-0-em p-t-0p5-em p-b-0p5-em verticalAlignParent">\

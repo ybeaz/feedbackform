@@ -650,8 +650,11 @@
 											<i class="fa fa-phone fa-2x sr-contact" data-toggle="tooltip" title="Phone"></i>&nbsp;\
 											<i class="fa fa-phone-square fa-2x sr-contact" data-toggle="tooltip" title="Viber"></i>&nbsp;\
 											<i class="fa fa-telegram fa-2x sr-contact" data-toggle="tooltip" title="Telegram"></i>&nbsp;\
+											<i class="fa fa-whatsapp fa-2x sr-contact" data-toggle="tooltip" title="WhatsApp" data-placement="top"></i>&nbsp;\
 											&nbsp;&nbsp;&nbsp;<span class="verticalAlignChild">\
-											+1 650 7410014<br />\
+											+1 917 81 53952<br />\
+											+1 650 7 410014<br />\
+											+7 912 66 19279\
 											</span></p>\
 										<p class="m-t-0-em m-b-0-em p-t-0p5-em p-b-0p5-em verticalAlignParent">\
 											<i class="fa fa-skype fa-2x sr-contact" data-toggle="tooltip" title="Skype" data-placement="top"></i>\
@@ -661,11 +664,6 @@
 											&nbsp;&nbsp;&nbsp;<span class="verticalAlignChild">r1@userto.com</span>\
 											<!-- <img class="h-m-1p5" src="http://arbir.ru/images/icons/at_sign_14102501.jpg"\
 											> --></p>\
-										<div class="m-t-0-em m-b-0-em p-t-0p5-em p-b-0p5-em verticalAlignParent">\
-											<i class="fa fa-whatsapp fa-2x sr-contact" data-toggle="tooltip" title="WhatsApp" data-placement="top"></i>&nbsp;\
-											&nbsp;&nbsp;&nbsp;<span class="verticalAlignChild">+7 9126619279\
-											<!-- <s>+7 912 6619279</s> --></span>\
-											</div>\
 									</div>\
 								</div>\
 								<div class="row">\
