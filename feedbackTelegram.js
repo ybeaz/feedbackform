@@ -1,14 +1,15 @@
 /*
-	State   
-		
+
+	TODO some day
 	
+	State   
 	
 	Action
 		CAPTURE_ADDED
 		CLEANED_FORM
 		? FILLED_FORM_ELEMENT
 		? SENT_FORM_MESSAGE
-*/
+
 
 import { createStore }		from 'redux';		//const 	{ createStore } 	= require('redux'); 
 import {combineReducers}	from 'redux';		//const 	{combineReducers} 	= require('redux');
@@ -16,6 +17,7 @@ import deepFreeze			from 'deep-freeze';	//var deepFreeze = require('deep-freeze'
 
 // Import my own testing tool
 import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
+*/
 
 //Checking if var is empty, see http://javascript.ru/php/empty 
 	function empty( mixed_var ) {	// Determine whether a variable is empty
@@ -693,9 +695,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 //Define	Function to process feedback capture array into string  
 	window.feedback.feedbackCapture					=	function(f){
 		
-		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ [window.feedback.form[f]], /* toEqual */ [] );
-		
-		
+		window.feedback.form[f].capture = {};
 		var capture			=	{};
 			capture.str		=	'';
 			capture.tlgrm	=	'';
@@ -721,9 +721,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 			}
 		}
 		
-		window.feedback.form[f].capture = capture;	
-		
-		//letsTest('feedbackCaptureString', /* testId */ '', /* expect */ window.feedback.form[f].elem, /* toEqual */ [] );
+		window.feedback.form[f].capture = capture;
 		
 		return;
 	}
@@ -805,8 +803,8 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 		 * Part for message sending via Telegram
  		 ****************************************** */
 		
-		if(	empty(window.feedback.form[f].email[0].messageTlgrm)){ 
-			window.feedback.form[f].email[0].messageTlgrm =	'';}
+		//Delete after 2019-01-01 if(	empty(window.feedback.form[f].email[0].messageTlgrm)){ }
+			window.feedback.form[f].email[0].messageTlgrm =	'';
 		
 		//console.info(' window.feedback.form[',f,'].email[0].messageTlgrm Before:',window.feedback.form[f].email[0].messageTlgrm);
 			window.feedback.form[f].email[0].messageTlgrm	+=							
@@ -827,8 +825,8 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 		 * Part for email AND Telegram sending
  		 ****************************************** */
 		
-		if(	empty(window.feedback.form[f].email[0].message)){ 
-			window.feedback.form[f].email[0].message =	'';}
+		//Delete after 2019-01-01 if(	empty(window.feedback.form[f].email[0].message)){ }
+			window.feedback.form[f].email[0].message =	'';
 		
 		//console.info(' window.feedback.form[',f,'].email[0].message Before:',window.feedback.form[f].email[0].message);
 			window.feedback.form[f].email[0].message	+=							
