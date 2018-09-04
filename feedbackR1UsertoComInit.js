@@ -647,20 +647,24 @@
 								<div class="row p-t-2">\
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">\
 										<p class="m-t-0-em m-b-0-em p-t-0p5-em p-b-0p5-em verticalAlignParent">\
-											<i class="fa fa-phone fa-2x sr-contact" data-toggle="tooltip" title="Phone"></i>&nbsp;\
-											<i class="fa fa-phone-square fa-2x sr-contact" data-toggle="tooltip" title="Viber"></i>&nbsp;\
-											<i class="fa fa-telegram fa-2x sr-contact" data-toggle="tooltip" title="Telegram"></i>&nbsp;\
-											<i class="fa fa-whatsapp fa-2x sr-contact" data-toggle="tooltip" title="WhatsApp" data-placement="top"></i>&nbsp;\
+											<i class="fas fa-phone fa-2x sr-contact" data-toggle="tooltip" title="Phone"></i>&nbsp;\
+											&nbsp;&nbsp;&nbsp;\
+                      <span class="verticalAlignChild">\
+                        +1 650 7 410014<br />\
+											</span>\
+                    </p>\
+                    <p class="m-t-0-em m-b-0-em p-t-0p5-em p-b-0p5-em verticalAlignParent">\
+                      <i class="fab fa-whatsapp fa-2x sr-contact" data-toggle="tooltip" title="WhatsApp" data-placement="top"></i>&nbsp;\
+                      <i class="fab fa-telegram fa-2x sr-contact" data-toggle="tooltip" title="Telegram"></i>&nbsp;\
+                      <i class="fab fa-viber fa-2x sr-contact" data-toggle="tooltip" title="Viber"></i>&nbsp;\
 											&nbsp;&nbsp;&nbsp;<span class="verticalAlignChild">\
-											+1 917 81 53952<br />\
-											+1 650 7 410014<br />\
 											+7 912 66 19279\
 											</span></p>\
 										<p class="m-t-0-em m-b-0-em p-t-0p5-em p-b-0p5-em verticalAlignParent">\
-											<i class="fa fa-skype fa-2x sr-contact" data-toggle="tooltip" title="Skype" data-placement="top"></i>\
+											<i class="fab fa-skype fa-2x sr-contact" data-toggle="tooltip" title="Skype" data-placement="top"></i>\
 											&nbsp;&nbsp;&nbsp;<span class="verticalAlignChild">rootstem</span></p>\
 										<p class="m-t-0-em m-b-0-em p-t-0p5-em p-b-0p5-em verticalAlignParent">\
-											<i class="fa fa-envelope-o fa-2x sr-contact" data-toggle="tooltip" title="Email" data-placement="top"></i>\
+											<i class="far fa-envelope fa-2x sr-contact" data-toggle="tooltip" title="Email" data-placement="top"></i>\
 											&nbsp;&nbsp;&nbsp;<span class="verticalAlignChild">r1@userto.com</span>\
 											<!-- <img class="h-m-1p5" src="http://arbir.ru/images/icons/at_sign_14102501.jpg"\
 											> --></p>\
