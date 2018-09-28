@@ -19,7 +19,7 @@ import deepFreeze			from 'deep-freeze';	//var deepFreeze = require('deep-freeze'
 import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 */
 
-//Checking if var is empty, see http://javascript.ru/php/empty 
+//Checking if var is empty, see https://javascript.ru/php/empty 
 	function empty( mixed_var ) {	// Determine whether a variable is empty
 		// 
 		// +   original by: Philippe Baumann
@@ -99,7 +99,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 				window.feedback.insertAppendNode(parentNode, node, 'append');
 				
 			var css =	'.modal-backdrop {display:none;visibility:hidden; position:relative;}' +
-						'.modal{background-image: url("http://userto.com/img/BlackTransparentBackground.png");z-index:100;}';
+						'.modal{background-image: url("https://userto.com/img/BlackTransparentBackground.png");z-index:100;}';
 			var	style = document.createElement('style');
 				style.setAttribute('type','text/css');
 				if (style.styleSheet){
@@ -191,7 +191,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 			for(var e = 0; e < window.feedback.form[f].elem.length; e++){			
 
 				var form = document.querySelector(".userto-form-" + f + "-elem-" + e); //document.getElementById("form-" + f);			
-					//See more: http://www.javascriptkit.com/dhtmltutors/css_selectors_api.shtml
+					//See more: https://www.javascriptkit.com/dhtmltutors/css_selectors_api.shtml
 					//console.info('form-',f,'-elem-',e,':',form);
 				var string	=	'';				
 			
@@ -539,7 +539,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 					window.feedback.form[f].elem[e].options		=	[];
 					//letsTest('feedbackCaptureArray 2', /* testId */ '', /* expect */ [selectArr[0].options], /* toEqual */ [] );
 							
-					//See more http://stackoverflow.com/questions/11583728/getting-the-selected-values-in-a-multiselect-tag-in-javascript/11583999#11583999
+					//See more https://stackoverflow.com/questions/11583728/getting-the-selected-values-in-a-multiselect-tag-in-javascript/11583999#11583999
 					for (var i = 0; i < selectArr[0].length; i++) {
 						if (selectArr[0].options[i].selected === true) {
 							
@@ -605,7 +605,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 				}	
 				
 				//Validation
-				//See more about checkValidity() http://www.w3schools.com/js/js_validation_api.asp
+				//See more about checkValidity() https://www.w3schools.com/js/js_validation_api.asp
 				else if(	inputArr[0].checkValidity() === false){
 					var alertString	=
 						inputArr[0].validationMessage  + '\n' + label +
@@ -644,7 +644,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 				//console.info(' input:',labelArr[0].innerHTML,' ',textareaValue);
 									
 				//Error empty field
-				//See more about checkValidity() http://www.w3schools.com/js/js_validation_api.asp				
+				//See more about checkValidity() https://www.w3schools.com/js/js_validation_api.asp				
 				if(		empty(textareaArr[0])	||
 						textareaArr[0].checkValidity() == false ){
 							
@@ -815,7 +815,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 					window.feedback.host		+	
 					window.feedback.pathname;					
 									
-				//'<a href="http://r1.userto.com/demoResizeFeedbackField.php" target="_blank">'+'Source site</a>';							
+				//'<a href="https://r1.userto.com/demoResizeFeedbackField.php" target="_blank">'+'Source site</a>';							
 				
 
 		//console.info(' window.feedback.form[',f,'].email[0]: After',window.feedback.form[f].email[0]);
@@ -849,7 +849,7 @@ import letsTest from 'C:/Data/Dev/LetsTest/letsTest.jsx';
 		//letsTest('feedbackSend 4-step ', /* testId */ '', /* expect */ [f, m, t,window.feedback.form], /* toEqual */ [] );
 		jQuery.ajax({
 			type: 			'POST',
-			url: 			'http://userto.com/php/phpGetPost.php',
+			url: 			'https://userto.com/api/phpGetPost.php',
 			data: {
 				optPost:	window.feedback.form[f].email[0].optPost,
 				emailTo:	window.feedback.form[f].email[0].toEmail,
