@@ -24,7 +24,7 @@
 				'Roman Cheskidov' 						+ '<br />' +
 				'+1 650 7410014' 						+ '<br />' +
 				'Skype: rootstem'						+ '<br />' +
-				'http://r1.userto.com'					+ '<br />' +
+				'https://r1.userto.com'					+ '<br />' +
 													'<br />' +				
 													'<br />' +		
 													'<br />' +
@@ -124,7 +124,7 @@
 				'Roman Cheskidov' 						+ '<br />' +
 				'+1 650 7410014' 						+ '<br />' +
 				'Skype: rootstem'						+ '<br />' +
-				'http://r1.userto.com'					+ '<br />' +
+				'https://r1.userto.com'					+ '<br />' +
 													'<br />' +				
 													'<br />' +		
 													'<br />' +
@@ -223,7 +223,7 @@
 				'Roman Cheskidov' 						+ '<br />' +
 				'+1 650 7410014' 						+ '<br />' +
 				'Skype: rootstem'						+ '<br />' +
-				'http://r1.userto.com'					+ '<br />' +
+				'https://r1.userto.com'					+ '<br />' +
 													'<br />' +				
 													'<br />' +		
 													'<br />' +
@@ -323,7 +323,7 @@
 				'Roman Cheskidov' 						+ '<br />' +
 				'+1 650 7410014' 						+ '<br />' +
 				'Skype: rootstem'						+ '<br />' +
-				'http://r1.userto.com'					+ '<br />' +
+				'https://r1.userto.com'					+ '<br />' +
 													'<br />' +				
 													'<br />' +		
 													'<br />' +
@@ -666,13 +666,13 @@
 										<p class="m-t-0-em m-b-0-em p-t-0p5-em p-b-0p5-em verticalAlignParent">\
 											<i class="far fa-envelope fa-2x sr-contact" data-toggle="tooltip" title="Email" data-placement="top"></i>\
 											&nbsp;&nbsp;&nbsp;<span class="verticalAlignChild">r1@userto.com</span>\
-											<!-- <img class="h-m-1p5" src="http://arbir.ru/images/icons/at_sign_14102501.jpg"\
+											<!-- <img class="h-m-1p5" src="https://arbir.ru/images/icons/at_sign_14102501.jpg"\
 											> --></p>\
 									</div>\
 								</div>\
 								<div class="row">\
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">\
-										<img src="http://r1.userto.com/img/_VVS3415-crop.png" \
+										<img src="https://r1.userto.com/img/_VVS3415-crop.png" \
 										class="img-responsive img-thumbnail h-m-15" ' + ' >\
 									</div>\
 								</div>\
